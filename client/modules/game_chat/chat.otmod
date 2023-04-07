@@ -1,0 +1,9 @@
+Module
+  name: game_chat
+  description: Chat
+  author: Xaii
+  website: genoxpoke
+  sandboxed: true
+  scripts: [ chat ]
+  @onLoad: init()
+  @onUnload: terminate()
