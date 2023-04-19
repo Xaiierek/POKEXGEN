@@ -7,8 +7,9 @@ Character < Creature
   image-source: ~
 
 CharacterWidget < UIWidget
-  image-source: /images/trainerCards/trainer
+  image-source: /images/trainerCards/trainer.png
   margin: 4
+  size: 190 20
   &updateOnStates: |
     function(self)
       local children = self:getChildren()
@@ -22,6 +23,33 @@ CharacterWidget < UIWidget
 
   $focus:
     opacity: 1.0
+
+  Label
+    id: vocation
+    color: #ffffff
+    anchors.top: name.bottom
+    anchors.left: parent.left
+    margin-top: 5
+    margin-left: 15
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+  
+    $on:
+      color: #ffffff
+
+  Label
+    id: serwer
+    color: #ffffff
+    anchors.top: name.bottom
+    anchors.left: parent.left
+    margin-top: 24
+    margin-left: 15
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+  
+    $on:
+      color: #ffffff
+
 
   Label
     id: name
@@ -70,7 +98,7 @@ CharacterWidget < UIWidget
   UIWidget
     //ICONE DO CLA
     id: ClaICON
-    image-source: /images/trainerCards/clans/trainer
+    image-source: /images/trainerCards/clans/none
     size: 40 40
     anchors.top: parent.top
     anchors.left: parent.left
@@ -236,20 +264,20 @@ MainWindow
   //  margin-left: 18
   //  margin-right: 18
 
-  UIWidget
-    size: 27 30
-    image-source: images/new_character
-    !tooltip: tr('Novo Personagem')
-    anchors.top: parent.top
-    anchors.right: parent.right
-    margin-top: 30
-    margin-right: 15
-    @onClick: modules.poke_create.showChar()
-    opacity: 0.8
-    $hover:
-      opacity: 1
-    $pressed:
-      opacity: 0.9
+  //UIWidget
+  //  size: 27 30
+  //  image-source: images/new_character
+  //  !tooltip: tr('Novo Personagem')
+  //  anchors.top: parent.top
+  //  anchors.right: parent.right
+  //  margin-top: 30
+  //  margin-right: 15
+  //  @onClick: modules.poke_create.showChar()
+  //  opacity: 0.8
+  //  $hover:
+  //    opacity: 1
+  //  $pressed:
+  //    opacity: 0.9
 
   UIButton
     id: buttonOk

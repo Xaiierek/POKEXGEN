@@ -1,5 +1,7 @@
 EnterGame = { }
 
+
+
 -- private variables
 local loadBox
 local enterGame
@@ -306,6 +308,9 @@ function EnterGame.init()
   serverHostTextEdit = customServerSelectorPanel:getChildById('serverHostTextEdit')
   clientVersionSelector = customServerSelectorPanel:getChildById('clientVersionSelector')
   
+  
+  
+  
   if Servers ~= nil then 
     for name,server in pairs(Servers) do
       serverSelector:addOption(name)
@@ -523,6 +528,7 @@ function EnterGame.doLogin(account, password, token, host)
 
   EnterGame.hide()
   loadBox = displayCancelBox(tr('Please wait'), tr('Connecting to login server...'))
+	--loadBox = g_ui.displayUI('loadbox')
   connect(loadBox, { onCancel = function(msgbox)
                                   loadBox = nil
                                   protocolLogin:cancelLogin()

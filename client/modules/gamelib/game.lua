@@ -116,3 +116,4 @@ end
 if not G.currentRsa then
   g_game.setRsa(OTSERV_RSA)
 end
+

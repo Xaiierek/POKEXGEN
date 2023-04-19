@@ -1,28 +1,27 @@
 CheckBox < UICheckBox
-  size: 16 16
+  size: 17 17
   text-align: left
   text-offset: 18 1
   color: #dfdfdf
   image-color: #dfdfdfff
-  image-rect: 0 0 15 15
+  image-rect: -3 0 17 17
   image-source: /images/ui/checkbox
-  change-cursor-image: true
-  cursor: pointer
+
 
   $hover !disabled:
     color: #ffffff
 
   $!checked:
-    image-clip: 0 0 15 15
+    image-clip: 0 0 25 15
 
   $hover !checked:
-    image-clip: 0 15 15 15
+    image-clip: 0 0 25 15
 
   $checked:
-    image-clip: 0 30 15 15
+    image-clip: 0 91 30 28
 
   $hover checked:
-    image-clip: 0 45 15 15
+    image-clip: 0 61 30 28
 
   $disabled:
     image-color: #dfdfdf88
@@ -101,7 +100,7 @@ ColorBox < UICheckBox
     image-clip: 0 0 16 16
 
 ButtonBox < UICheckBox
-  font: verdana-11px-antialised
+  font: lucida-11px-rounded
   color: #dfdfdfff
   size: 106 23
   text-offset: 0 0

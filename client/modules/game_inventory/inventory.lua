@@ -27,7 +27,7 @@ InventorySlotStyles = {
   [InventorySlotLeg] = "LegSlot",
   [InventorySlotFeet] = "FeetSlot",
   [InventorySlotFinger] = "FingerSlot",
-  [InventorySlotAmmo] = "AmmoSlot",
+  [InventorySlotAmmo] = "AmmoSlot"
 }
 
 inventoryWindow = nil

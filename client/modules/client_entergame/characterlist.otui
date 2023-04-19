@@ -45,11 +45,11 @@ CharacterWidget < UIWidget
 MainWindow
   id: charactersWindow
   image-source: images/background_characterlist
-  size: 881 459
+
   padding: 0
   draggable: false
   visible: false
-  size: 350 400
+
   $mobile:
     size: 350 280
   @onEnter: CharacterList.doLogin()

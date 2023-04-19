@@ -1,0 +1,9 @@
+Module
+  name: game_banana
+  description: Banana clicker
+  author: Tofame
+  website: -
+  sandboxed: true
+  scripts: [ banana ]
+  @onLoad: init()
+  @onUnload: terminate()

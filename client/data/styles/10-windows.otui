@@ -1,16 +1,17 @@
 Window < UIWindow
-  font: verdana-11px-antialised
+  font: lucida-11px-rounded
   size: 200 200
   opacity: 1
   color: #dfdfdf
-  text-offset: 0 6
+  text-offset: 0 0
   text-align: top
   image-source: /images/ui/window
-  image-border: 6
-  image-border-top: 27
+  image-border: 7
+  image-border-top: 29
+  image-size: 200 0
   padding-top: 36
-  padding-left: 16
-  padding-right: 16
+  padding-left: 15
+  padding-right: 25
   padding-bottom: 16
 
   $disabled:
@@ -21,8 +22,9 @@ Window < UIWindow
 
 HeadlessWindow < UIWindow
   image-source: /images/ui/window_headless
-  image-border: 5
+  image-border: 1
   padding: 5
+
 
 MainWindow < Window
   anchors.centerIn: parent

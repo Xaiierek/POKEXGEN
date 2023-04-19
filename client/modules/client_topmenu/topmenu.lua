@@ -47,14 +47,16 @@ function init()
                     onGameEnd = offline,
                     onPingBack = updatePing })
 
-  topMenu = g_ui.createWidget('TopMenu', g_ui.getRootWidget())  
+  topMenu = g_ui.createWidget('TopMenu', g_ui.getRootWidget())
   g_keyboard.bindKeyDown('Ctrl+Shift+T', toggle)
-  
+
   if g_game.isOnline() then
     scheduleEvent(online, 10)
+  else
+    topMenu:hide() -- Dodaj tę linię, aby ukryć topMenu na ekranie logowania
   end
-  
-  updateFps()  
+
+  updateFps()
   updateStatus()
 end
 
@@ -70,6 +72,8 @@ function terminate()
 end
 
 function online()
+ topMenu:show()
+
   if topMenu.hideIngame then
     hide()
   else
@@ -90,9 +94,12 @@ function online()
       end
     end)
   end
+  show()
 end
 
 function offline()
+topMenu:hide()
+
   if topMenu.hideIngame then
     show()
   end
@@ -242,12 +249,14 @@ function hide()
 end
 
 function show()
-  topMenu:show()
-  if not topMenu.hideIngame then
-    modules.game_interface.getRootPanel():addAnchor(AnchorTop, 'topMenu', AnchorBottom)
-  end
-  if modules.game_stats then
-    modules.game_stats.hide()
+  if g_game.isOnline() then
+    topMenu:show()
+    if not topMenu.hideIngame then
+      modules.game_interface.getRootPanel():addAnchor(AnchorTop, 'topMenu', AnchorBottom)
+    end
+    if modules.game_stats then
+      modules.game_stats.hide()
+    end
   end
 end
 

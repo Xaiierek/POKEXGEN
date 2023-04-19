@@ -1,0 +1,76 @@
+MainWindow
+  !text: tr('Banana Clicker')
+  size: 500 375
+
+  @onEnter: modules.game_banana.hide()
+  @onEscape: modules.game_banana.hide()
+
+  // Banana
+  Creature
+    id: imageOfClicker
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: -15
+    image-source: /modules/game_banana/images/buttonimg/BananaImageText
+    size: 460 74
+
+  HorizontalSeparator
+    id: separatorUno
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: imageOfClicker.bottom
+    margin-top: -10
+
+  Label
+    id: bananaText
+    !text: tr('Every time you click monkey, you get one banana to your inventory')
+    anchors.top: separatorUno.bottom
+    anchors.left: parent.left
+    margin-bottom: 3
+    width: 430
+    margin-left: 20
+
+  // Button
+
+  Button
+    id: clickBanana
+    !tooltip: tr('1 banana')
+    anchors.top: bananaText.bottom
+    anchors.left: parent.left
+    margin-top: 50
+    margin-left: 180
+    image-source: /modules/game_banana/images/buttonimg/le_monkeyButton
+    @onClick: modules.game_banana.sendMyCode("sendBanana")
+
+  HorizontalSeparator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 10
+    margin-top: 5
+
+  // Showing how many points you have, etc, opcodes
+
+  Label
+    id: statusPointsText
+    !text: tr('Bananas clicked:')
+    text-align: center
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+  Label
+    id: clicksAmount
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    margin-left: 4
+    margin-bottom: 0
+    width: 60
+
+  Button
+    id: CancelButton
+    !text: tr('Close')
+    width: 64
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    margin-bottom: -6
+    @onClick: modules.game_banana.hide()

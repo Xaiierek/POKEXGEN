@@ -35,7 +35,7 @@ end
 function hide()
   background:hide()
   local name = g_game.getCharacterName()
-  g_window.setTitle("Geno X Pokémon | Player: "..name)
+  g_window.setTitle("GenoXPokemon | Player: "..name)
   --modules.game_bottommenu.show()
   removeEvent(myLoopEventId1)
   removeEvent(myLoopEventId2)

@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Window
+  id: tutorialWindow
+  anchors.top: parent.top
+  anchors.horizontalCenter: parent.horizontalCenter
+  margin-top: 30
+  width: 550
+  height: 150
+  background-source: /images/ui/window
+  background-repeat: no-repeat
+  image-source: /images/ui/window
+  image-repeat: no-repeat
+
+  Label
+    id: label
+    anchors.fill: parent
+    text-align: center
+    image-source: /images/ui/pidegot
+    size: 125 50

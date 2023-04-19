@@ -107,7 +107,6 @@ GameServerOpcodes = {
     GameServerStoreTransactionHistory   = 253, -- 1080
     GameServerStoreCompletePurchase     = 254  -- 1080
 }
-
 ClientOpcodes = {
     ClientEnterAccount                  = 1,
     ClientEnterGame                     = 10,

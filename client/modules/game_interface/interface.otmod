@@ -15,6 +15,7 @@ Module
     - game_healthinfo
     - game_skills
     - game_inventory
+    - game_areas
     - game_containers
     - game_viplist
     - game_battle
@@ -42,5 +43,8 @@ Module
     - game_stats
     - game_shaders
     - game_bot
+    - game_tutorial
+    - game_house
+    - game_pokedex
   @onLoad: init()
   @onUnload: terminate()

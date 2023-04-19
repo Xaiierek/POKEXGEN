@@ -996,7 +996,7 @@ function refreshViewMode()
       gameMapPanel:setMarginTop(-32)   
     end
     if modules.game_console then
-     -- modules.game_console.switchMode(true)
+      modules.game_console.switchMode(true)
     end
   end
 --  if modules.game_actionbar then

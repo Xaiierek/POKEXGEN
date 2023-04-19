@@ -57,6 +57,7 @@ function ProtocolGame.unregisterOpcode(opcode)
 end
 
 function ProtocolGame.registerExtendedOpcode(opcode, callback)
+	print("opcode: ", opcode, "callback: ", callback)
   if not callback or type(callback) ~= 'function' then
     error('Invalid callback.')
   end
@@ -66,7 +67,9 @@ function ProtocolGame.registerExtendedOpcode(opcode, callback)
   end
 
   if extendedCallbacks[opcode] then
-    error('Opcode is already taken.')
+    --error('Opcode is already taken.')
+	    error('Opcode is already taken: ' .. tostring(opcode)) -- Dodaj szczegóły o zajętym opcode
+
   end
 
   extendedCallbacks[opcode] = callback

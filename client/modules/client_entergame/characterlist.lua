@@ -85,6 +85,7 @@ local function resendWait()
         local charInfo = { worldHost = selected.worldHost,
                            worldPort = selected.worldPort,
                            worldName = selected.worldName,
+						   Vocation = selected.vocation,
                            characterName = selected.characterName }
         tryLogin(charInfo)
       end
@@ -143,42 +144,14 @@ function onGameUpdateNeeded(signature)
   errorBox.onOk = function()
     errorBox = nil
     CharacterList.showAgain()
---  end  
---end
---
---function onGameEnd()
---  scheduleAutoReconnect()
---  CharacterList.showAgain()
---end
---
---function onLogout()
---  lastLogout = g_clock.millis()
---end
---
---function scheduleAutoReconnect()
---  if lastLogout + 2000 > g_clock.millis() then
---    return
---  end
---  if autoReconnectEvent then
---    removeEvent(autoReconnectEvent)    
---  end
---  autoReconnectEvent = scheduleEvent(executeAutoReconnect, 2500)
 end
-
---function executeAutoReconnect()  
---  if not autoReconnectButton or not autoReconnectButton:isOn() or g_game.isOnline() then
---    return
---  end
---  if errorBox then
---    errorBox:destroy()
---    errorBox = nil
---  end
---  CharacterList.doLogin()
 end
 
 -- public functions
 function CharacterList.init()
   --if USE_NEW_ENERGAME then return end
+  
+  --ProtocolGame.registerExtendedOpcode(196, onVocationInfo)
   connect(g_game, { onLoginError = onGameLoginError })
   connect(g_game, { onLoginToken = onGameLoginToken })
   connect(g_game, { onUpdateNeeded = onGameUpdateNeeded })
@@ -188,6 +161,8 @@ function CharacterList.init()
   connect(g_game, { onGameEnd = CharacterList.showAgain })
  -- connect(g_game, { onGameEnd = onGameEnd })
  -- connect(g_game, { onLogout = onLogout })
+ 
+ 
 
   if G.characters then
     CharacterList.create(G.characters, G.characterAccount)
@@ -244,6 +219,22 @@ function CharacterList.terminate()
   CharacterList = nil
 end
 
+
+function registerExtendedOpcode(opcode, callback)
+  print("opcode: ", opcode, "callback: ", callback) -- Dodaj tę linię
+
+  if opcode < 0 or opcode > 255 then
+    error('Invalid opcode. Range: 0-255')
+  end
+
+  if extendedCallbacks[opcode] then
+    error('Opcode is already taken: ' .. tostring(opcode)) -- Dodaj szczegóły o zajętym opcode
+  end
+
+  extendedCallbacks[opcode] = callback
+end
+
+
 function CharacterList.create(characters, account, otui)
   if not otui then otui = 'newcharacterlist' end
   if charactersWindow then
@@ -252,6 +243,8 @@ function CharacterList.create(characters, account, otui)
 
   charactersWindow = g_ui.displayUI(otui)
   characterList = charactersWindow:getChildById('characters')
+  
+ 
  -- autoReconnectButton = charactersWindow:getChildById('autoReconnect')
 
   -- characters
@@ -263,9 +256,20 @@ function CharacterList.create(characters, account, otui)
   local focusLabel
   for i,characterInfo in ipairs(characters) do
     local widget = g_ui.createWidget('CharacterWidget', characterList)
-	widget:setImageSource('/images/trainerCards/')
+	widget:setImageSource('/images/trainerCards/' .. getVocation(characterInfo.vocation))
 	
-    g_ui.createWidget('Character', widget)
+	local vocationLabel = widget:getChildById('vocation')
+	vocationLabel:setText("Vocation: ", clientId)
+
+
+
+	local serwerLabel = widget:getChildById('serwer')
+	serwerLabel:setText("World: " .. characterInfo.worldName)
+		
+	
+    --g_ui.createWidget('Character', widget):getOutfit(characterInfo.outfit)
+	
+	
     for key,value in pairs(characterInfo) do
       local subWidget = widget:getChildById(key)
       if subWidget then
@@ -289,6 +293,9 @@ function CharacterList.create(characters, account, otui)
     widget.worldHost = characterInfo.worldIp
     widget.worldPort = characterInfo.worldPort
 
+
+
+
     connect(widget, { onDoubleClick = function () CharacterList.doLogin() return true end } )
 
     if i == 1 or (g_settings.get('last-used-character') == widget.characterName and g_settings.get('last-used-world') == widget.worldName) then
@@ -300,11 +307,6 @@ function CharacterList.create(characters, account, otui)
     characterList:focusChild(focusLabel, KeyboardFocusReason)
     addEvent(function() characterList:ensureChildVisible(focusLabel) end)
   end
-  
- -- characterList.onChildFocusChange = function()
- --   removeEvent(autoReconnectEvent)
- --   autoReconnectEvent = nil
- -- end
 
   -- account
   local status = ''
@@ -330,12 +332,7 @@ function CharacterList.create(characters, account, otui)
   else
     accountStatusLabel:setOn(false)
   end
-  
- -- autoReconnectButton.onClick = function(widget)
- --   local autoReconnect = not g_settings.getBoolean('autoReconnect', true)
- --   autoReconnectButton:setOn(autoReconnect)
- --   g_settings.set('autoReconnect', autoReconnect)
- -- end
+
 end
 
 function CharacterList.destroy()
@@ -392,6 +389,7 @@ function CharacterList.doLogin()
     local charInfo = { worldHost = selected.worldHost,
                        worldPort = selected.worldPort,
                        worldName = selected.worldName,
+					   Vocation = selected.vocation,
                        characterName = selected.characterName }
     charactersWindow:hide()
     if loginEvent then
@@ -430,3 +428,4 @@ function CharacterList.cancelWait()
   CharacterList.destroyLoadBox()
   CharacterList.showAgain()
 end
+

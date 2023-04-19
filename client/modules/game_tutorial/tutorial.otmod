@@ -1,0 +1,9 @@
+Module
+  name: game_tutorial
+  description: Tutorial for newbies
+  author: Xaii
+  website: 
+  sandboxed: true
+  scripts: [ tutorial ]
+  @onLoad: init()
+  @onUnload: terminate()
