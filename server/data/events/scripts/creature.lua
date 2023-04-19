@@ -45,7 +45,14 @@ function Creature:onTargetCombat(target)
 			end
 --		else --tile damage
 		end
+
 	end
+		if (self:isPlayer() and target:isNpc()) then
+			self:say("hi", TALKTYPE_PRIVATE_PN, false, target)
+			self:say("trade", TALKTYPE_PRIVATE_PN, false, target)
+			return RETURNVALUE_NOTPOSSIBLE   
+		end
+	
 	return true	
 end
 

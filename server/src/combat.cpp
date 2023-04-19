@@ -192,7 +192,10 @@ ReturnValue Combat::canTargetCreature(Player* player, Creature* target)
 	if (player == target) {
 		return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 	}
-
+	if (target->getNpc())
+	{
+		return Combat::canDoCombat(player, target);
+	}
 	if (!player->hasFlag(PlayerFlag_IgnoreProtectionZone)) {
 		//pz-zone
 		if (player->getZone() == ZONE_PROTECTION) {
@@ -219,7 +222,8 @@ ReturnValue Combat::canTargetCreature(Player* player, Creature* target)
 		if (target->getPlayer()) {
 			return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 		} else {
-			return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
+			if (!target->getNpc())
+				return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE;
 		}
 	}
 
