@@ -64,7 +64,7 @@ Creature::Creature() : Thing()
     m_icon = Otc::NpcIconNone;
     m_lastStepDirection = Otc::InvalidDirection;
     m_footLastStep = 0;
-    m_nameCache.setFont(g_fonts.getFont("verdana-11px-rounded"));
+    m_nameCache.setFont(g_fonts.getFont("lucida-11px-rounded"));
     m_nameCache.setAlign(Fw::AlignTopCenter);
     m_footStep = 0;
     //m_speedFormula.fill(-1);

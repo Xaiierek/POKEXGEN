@@ -14,41 +14,72 @@ MainWindow
   @onEnter: onCloseInformation()
   @onEscape: onCloseInformation()
 
-
   Panel
     id: full_content
     anchors.fill: parent
     margin: 5
 
-    Panel
-      id: left_image
-      anchors.left: parent.left
+    Label
+      id: pokemon_label
       anchors.top: parent.top
-      size: 140 140
+      anchors.left: parent.left
+      font: verdana-11px-rounded
+      color: #abaaaa
+      margin-top: 5
+      margin-left: 5
+      text-auto-resize: true
 
+    Label
+      id: type_label
+      anchors.right: parent.right
+      anchors.top: parent.top
+      font: verdana-11px-rounded
+      color: #abaaaa
+      size: 24 25
+      margin-top: 5
+      margin-left: 5
+
+    Label
+      id: type_label2
+      anchors.right: parent.right
+      anchors.top: type_label.top
+      font: verdana-11px-rounded
+      color: #abaaaa
+      size: 24 25
+      margin-top: 30
+      margin-left: 5
+
+    Panel
+      id: pokemon_image
+      anchors.top: parent.top
+      anchors.left: parent.horizontalCenter
+      margin-top: 10
+      margin-left: -70
+      width: 140
+      height: 140
 
     Panel
       id: separator
       anchors.left: parent.left
       anchors.right: parent.right
-      anchors.top: left_image.bottom
+      anchors.top: pokemon_image.bottom
       height: 2
       background-color: #242424
       margin-top: 5
       margin-left: 5
       margin-right: 5
 
-    Label
-      id: summon_status_label
-      anchors.top: separator.bottom
-      anchors.left: parent.left
-      anchors.right: parent.right
-      font: verdana-11px-rounded
-      color: #abaaaa
-      margin-top: 10
-      margin-left: 5
-      margin-right: 5
-      text-auto-resize: true
+  Panel
+    id: movelist_label
+    font: verdana-11px-rounded
+    anchors.top: separator.top
+    anchors.left: parent.left
+    anchors.bottom: closed_button.bottom
+    margin-top: 5
+    margin-bottom: 10
+    margin-left: 5
+    text-auto-resize: true
+
 
   Button
     id: closed_button
