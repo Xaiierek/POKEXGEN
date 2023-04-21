@@ -53,9 +53,9 @@ function onLogin(player)
 
 	
 	if player:isOnSurf() then -- Check surf
-		--local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
-		--if totalSpeed < 50 then totalSpeed = 50 end
-		--player:changeSpeed(-player:getSpeed() + totalSpeed)
+		local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
+		if totalSpeed < 50 then totalSpeed = 50 end
+		player:changeSpeed(-player:getSpeed() + totalSpeed)
 		player:updatePlayerSpeed()
 	elseif player:isOnRide() then -- Check ride
 		local summonName = player:getSummonNameFromBall()
@@ -63,9 +63,9 @@ function onLogin(player)
 		player:updatePlayerSpeed()
 		if monsterType and monsterType:isRideable() > 0 then
 		player:updatePlayerSpeed()
-			--local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
-			--if totalSpeed < 50 then totalSpeed = 50 end
-			--player:changeSpeed(-player:getSpeed() + totalSpeed)
+			local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
+			if totalSpeed < 50 then totalSpeed = 50 end
+			player:changeSpeed(-player:getSpeed() + totalSpeed)
 			doChangeOutfit(player:getId(), {lookType = monsterType:isRideable()})
 		else
 			print("WARNING! Player " .. player:getName() .. " summonName not found onLogin for ride!")
@@ -75,13 +75,13 @@ function onLogin(player)
 	elseif player:isOnFly() then -- Check fly
 		local summonName = player:getSummonNameFromBall()
 		local monsterType = MonsterType(summonName)
-		player:updatePlayerSpeed(95)
+		--player:updatePlayerSpeed(1500)
 		
 		if monsterType and monsterType:isFlyable() > 0 then
-			player:updatePlayerSpeed(95)
-			--local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
-			--if totalSpeed < 50 then totalSpeed = 50 end
-			--player:changeSpeed(-player:getSpeed() + totalSpeed)
+			--player:updatePlayerSpeed(1500)
+			local totalSpeed = player:getStorageValue(storageLogoutSpeed) or 50
+			if totalSpeed < 50 then totalSpeed = 50 end
+			player:changeSpeed(-player:getSpeed() + totalSpeed)
 			doChangeOutfit(player:getId(), {lookType = monsterType:isFlyable()})
 			player:activateFly()
 			
