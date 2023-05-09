@@ -1,4 +1,4 @@
-local musicFilename = "/sounds/startup"
+local musicFilename = "/sounds/environment/city_01"
 local musicChannel = nil
 
 function setMusic(filename)
@@ -41,12 +41,12 @@ function startup()
   end
   
   -- Play startup music (The Silver Tree, by Mattias Westlund)
-  --musicChannel:enqueue(musicFilename, 3)
+  musicChannel:enqueue(musicFilename, 3)
   connect(g_game, { onGameStart = function() if musicChannel ~= nil then musicChannel:stop(3) end end })
   connect(g_game, { onGameEnd = function()
       if g_sounds ~= nil then
         g_sounds.stopAll()
-        --musicChannel:enqueue(musicFilename, 3)
+        musicChannel:enqueue(musicFilename, 3)
       end
   end })
 end
@@ -58,7 +58,7 @@ function init()
                     onGameEnd = onGameEnd })
 
   if g_sounds ~= nil then
-    --g_sounds.preload(musicFilename)
+    g_sounds.preload(musicFilename)
   end
 
   if not Updater then

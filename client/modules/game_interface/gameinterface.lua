@@ -50,10 +50,15 @@ function init()
   gameMapPanel = gameRootPanel:getChildById('gameMapPanel')
   gameRightPanels = gameRootPanel:getChildById('gameRightPanels')
   gameLeftPanels = gameRootPanel:getChildById('gameLeftPanels')
+  
   gameBottomPanel = gameRootPanel:getChildById('gameBottomPanel')
+  
+  
   gameBottomActionPanel = gameRootPanel:getChildById('gameBottomActionPanel')
   gameRightActionPanel = gameRootPanel:getChildById('gameRightActionPanel')
   gameLeftActionPanel = gameRootPanel:getChildById('gameLeftActionPanel')  
+  
+  
   gameTopBar = gameRootPanel:getChildById('gameTopBar')
   gameLeftActions = gameRootPanel:getChildById('gameLeftActions')
   connect(gameLeftPanel, { onVisibilityChange = onLeftPanelVisibilityChange })
@@ -92,6 +97,19 @@ function bindKeys()
   g_keyboard.bindKeyDown('Ctrl+L', function() tryLogout(false) end, gameRootPanel)
   g_keyboard.bindKeyDown('Ctrl+W', function() g_map.cleanTexts() modules.game_textmessage.clearMessages() end, gameRootPanel)
 end
+
+
+--function bindWalkKey(key, dir)
+--  g_keyboard.bindKeyDown(key, function() changeWalkDir(dir) end, gameRootPanel, true)
+--  g_keyboard.bindKeyUp(key, function() changeWalkDir(dir, true) end, gameRootPanel, true)
+--  g_keyboard.bindKeyPress(key, function() smartWalk(dir) end, gameRootPanel)
+--end
+--
+--function unbindWalkKey(key)
+--  g_keyboard.unbindKeyDown(key, gameRootPanel)
+--  g_keyboard.unbindKeyUp(key, gameRootPanel)
+--  g_keyboard.unbindKeyPress(key, gameRootPanel)
+--end
 
 function terminate()
   hide()
@@ -580,6 +598,11 @@ end
 
 function processMouseAction(menuPosition, mouseButton, autoWalkPos, lookThing, useThing, creatureThing, attackCreature, marking)
   local keyboardModifiers = g_keyboard.getModifiers()
+  
+    if (mouseButton == MouseLeftButton or mouseButton == MouseRightButton) then
+      local player = g_game.getLocalPlayer()
+      print(""..useThing:getId().."")
+  end
 
   if g_app.isMobile() then
     if mouseButton == MouseRightButton then

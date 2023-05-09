@@ -117,6 +117,7 @@ function init()
 		chatTextLineWindow:setWidth(self:getWidth()-28)
 		chatEnterBackground:setWidth(self:getWidth()-36)
 	end
+
 	chatWindow:getChildById('rB'):setMaximum(1600)
 	chatWindow:getChildById('rB'):setMinimum(245)
 
@@ -924,6 +925,11 @@ function onTalk(name, level, mode, message, channelId, creaturePos)
   end
 
   if ignoreNpcMessages and mode == MessageModes.NpcFrom then return end
+	
+  if mode == 51 then
+	mode = MessageModes.NpcFrom
+  end
+
 
   speaktype = SpeakTypes[mode]
 
@@ -968,6 +974,9 @@ function onTalk(name, level, mode, message, channelId, creaturePos)
 
     local staticText = StaticText.create()
     staticText:addMessage(name, mode, staticMessage)
+	local offsetY = -12
+    local newPosition = {x = creaturePos.x, y = creaturePos.y, z = creaturePos.z}
+    newPosition.y = newPosition.y + offsetY
     g_map.addThing(staticText, creaturePos, -1)
   end
 

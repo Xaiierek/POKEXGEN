@@ -12,7 +12,7 @@ Module
     - game_textmessage
     - game_console
     - game_outfit
-    - game_healthinfo
+    - game_health
     - game_skills
     - game_inventory
     - game_areas
@@ -38,11 +38,9 @@ Module
     - client_textedit
     - client_profiles
     - game_actionbar
-    - game_prey
     - game_imbuing
     - game_stats
     - game_shaders
-    - game_bot
     - game_tutorial
     - game_house
     - game_pokedex

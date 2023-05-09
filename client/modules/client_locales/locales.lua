@@ -16,7 +16,7 @@ function createWindow()
   local count = 0
   for name,locale in pairs(installedLocales) do
     local widget = g_ui.createWidget('LocalesButton', localesPanel)
-    widget:setImageSource('/images/flags/' .. name .. '')
+    widget:setImageSource('/images/flags/' .. name .. 'aaa kurwwaaaa')
     widget:setText(locale.languageName)
     widget.onClick = function() selectFirstLocale(name) end
     count = count + 1

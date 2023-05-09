@@ -277,10 +277,10 @@ function setOption(key, value, force)
     end
     audioPanel:getChildById('botSoundVolumeLabel'):setText(tr('Bot sound volume: %d', value))    
   elseif key == 'showHealthManaCircle' then
-    modules.game_healthinfo.healthCircle:setVisible(value)
-    modules.game_healthinfo.healthCircleFront:setVisible(value)
-    modules.game_healthinfo.manaCircle:setVisible(value)
-    modules.game_healthinfo.manaCircleFront:setVisible(value)
+    --modules.game_healthinfo.healthCircle:setVisible(value)
+    --modules.game_healthinfo.healthCircleFront:setVisible(value)
+    --modules.game_healthinfo.manaCircle:setVisible(value)
+    --modules.game_healthinfo.manaCircleFront:setVisible(value)
   elseif key == 'backgroundFrameRate' then
     local text, v = value, value
     if value <= 0 or value >= 201 then text = 'max' v = 0 end
@@ -318,8 +318,8 @@ function setOption(key, value, force)
   elseif key == 'hidePlayerBars' then
     gameMapPanel:setDrawPlayerBars(value)
   elseif key == 'topHealtManaBar' then
-    modules.game_healthinfo.topHealthBar:setVisible(value)
-    modules.game_healthinfo.topManaBar:setVisible(value)
+   --modules.game_healthinfo.topHealthBar:setVisible(value)
+   --modules.game_healthinfo.topManaBar:setVisible(value)
   elseif key == 'displayText' then
     gameMapPanel:setDrawTexts(value)
   elseif key == 'dontStretchShrink' then
