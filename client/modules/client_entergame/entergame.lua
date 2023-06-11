@@ -1,7 +1,5 @@
 EnterGame = { }
 
-
-
 -- private variables
 local loadBox
 local enterGame

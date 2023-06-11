@@ -433,7 +433,7 @@ end
 
 function doKeyCombo(keyCombo, repeated)
   if not g_game.isOnline() then return end
-  if modules.game_console and modules.game_console.isChatEnabled() then
+  if modules.game_console then
     if keyCombo:len() == 1 then 
       return
     end

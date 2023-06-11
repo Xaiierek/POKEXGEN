@@ -1,5 +1,7 @@
 CharacterList = { }
 
+
+
 -- private variables
 local charactersWindow
 local loadBox
@@ -11,6 +13,7 @@ local waitingWindow
 local updateWaitEvent
 local resendWaitEvent
 local loginEvent
+outfitBox = nil
 --local autoReconnectEvent
 --local lastLogout = 0
 
@@ -234,6 +237,25 @@ function registerExtendedOpcode(opcode, callback)
   extendedCallbacks[opcode] = callback
 end
 
+--function getVocation(vocationId)
+--    return g_vocations[vocationId] or "None"
+--end
+
+
+function getVocationName(vocationId)
+  local vocationNames = {
+    [0] = "None",
+    [1] = "Hunter",
+    [2] = "Catcher",
+    [3] = "Healer",
+    [4] = "Blocker",
+	[5] = "Explorer",
+  }
+
+  return vocationNames[vocationId] or "None"
+end
+
+
 
 function CharacterList.create(characters, account, otui)
   if not otui then otui = 'newcharacterlist' end
@@ -254,18 +276,27 @@ function CharacterList.create(characters, account, otui)
   characterList:destroyChildren()
   local accountStatusLabel = charactersWindow:getChildById('accountStatusLabel')
   local focusLabel
+  
+  
   for i,characterInfo in ipairs(characters) do
-    local widget = g_ui.createWidget('CharacterWidget', characterList)
-	widget:setImageSource('/images/trainerCards/' .. getVocation(characterInfo.vocation))
+    local widget = g_ui.createWidget('CharacterWidget', characterList)	
 	
-	local vocationLabel = widget:getChildById('vocation')
-	vocationLabel:setText("Vocation: ", clientId)
+	local vocationId = characterInfo.vocationId
+    if vocationId then
+       -- widget:setImageSource('/images/trainerCards/' .. getVocationName(characterInfo.vocationId))
+       local vocationLabel = widget:getChildById('vocation')
+		vocationLabel:setText("Vocation: " .. getVocationName(characterInfo.vocationId))
+   -- else
+       -- print("Vocation ID is missing for character: " .. characterInfo.name)
+    end
+   -- print("Character: " .. characterInfo.name .. ", Vocation ID: " .. tostring(vocationId))
 
 
 
 	local serwerLabel = widget:getChildById('serwer')
 	serwerLabel:setText("World: " .. characterInfo.worldName)
-		
+	
+
 	
     --g_ui.createWidget('Character', widget):getOutfit(characterInfo.outfit)
 	

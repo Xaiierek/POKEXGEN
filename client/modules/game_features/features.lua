@@ -189,6 +189,7 @@ function updateFeatures(version)
 	  -- g_game.enableFeature(GameDistanceEffectU16)
 	  g_game.enableFeature(GameDistanceShootU16)
 	  g_game.enableFeature(GameDiagonalAnimatedText)
+	  g_game.enableFeature(GameEnhancedAnimations)
 	  g_game.enableFeature(GameExtendedOpcode)
     end
     

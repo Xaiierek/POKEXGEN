@@ -240,6 +240,7 @@ function ProtocolLogin:parseCharacterList(msg)
       local character = {}
       local worldId = msg:getU8()
       character.name = msg:getString()
+	  character.vocationId = msg:getU32()
       character.worldName = worlds[worldId].worldName
       character.worldIp = worlds[worldId].worldIp
       character.worldPort = worlds[worldId].worldPort

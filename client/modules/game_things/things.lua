@@ -12,6 +12,9 @@ end
 function load()
   local version = g_game.getClientVersion()
   local things = g_settings.getNode('things')
+	g_things.loadOtb ('/items/items.otb')
+	g_things.loadXml('/items/items.xml')
+  
   
   local datPath, sprPath
   if things and things["data"] ~= nil and things["sprites"] ~= nil then

@@ -165,6 +165,8 @@ namespace Proto {
         GameServerFloorChangeDown           = 191,
         GameServerLootContainers            = 192,
         GameServerTournamentLeaderboard     = 197,
+		//198 House
+		//199 pokedex
         GameServerChooseOutfit              = 200,
         GameServerImpactTracker             = 204,
         GameServerItemsPrices               = 205,
@@ -227,6 +229,7 @@ namespace Proto {
 
         // otclient ONLY
         ClientExtendedOpcode                = 50,
+
 
         // NOTE: add any custom opcodes in this range
 

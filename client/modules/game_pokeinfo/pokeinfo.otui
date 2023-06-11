@@ -1,0 +1,76 @@
+PokemonData < UILabel
+  font: sans-bold-16px
+  anchors.left: parent.left
+  anchors.top: prev.bottom
+  color: #abaaaa
+  margin-top: 6
+  height: 20
+  text-auto-resize: true
+
+MainWindow
+  id: pokemonLookWindow
+  !text: tr('Pokemon Information')
+  size: 530 180
+  focusable: false
+  @onEnter: onClosePokemonInformation()
+  @onEscape: onClosePokemonInformation()
+
+  Panel
+    id: full_content
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    
+    Panel
+      id: left_image
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.bottom: parent.bottom
+      size: 140 140
+
+      Label
+        id: poke
+        font: sans-bold-16px
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        color: #abaaaa
+        margin-top: 5
+        margin-bottom: 5
+
+    Panel
+      id: right_content
+      anchors.top: parent.top
+      anchors.left: left_image.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 10
+
+      Label
+        id: pokemon_name
+        font: sans-bold-16px
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+        color: #abaaaa
+        margin-top: 5
+        margin-bottom: 5
+
+      PokemonData
+        id: pokemon_level
+        anchors.top: prev.bottom
+        margin-top: 10
+
+      PokemonData
+        id: pokemon_boost
+        margin-top: 10
+
+      Button
+        id: closed_button
+        !text: tr("Close")
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        margin: 10
+        focusable: false
+        @onClick: onClosePokemonInformation()

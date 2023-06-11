@@ -45,7 +45,7 @@ mountButton = nil
 fightModeRadioGroup = nil
 buttonPvp = nil
 
-soulLabel = nil
+--soulLabel = nil
 capLabel = nil
 conditionPanel = nil
 
@@ -122,14 +122,15 @@ function init()
 -- controls end
 
 -- status
-  soulLabel = inventoryWindow:recursiveGetChildById('soulLabel')
-  capLabel = inventoryWindow:recursiveGetChildById('capLabel')
+ -- soulLabel = inventoryWindow:recursiveGetChildById('soulLabel')
+--  capLabel = inventoryWindow:recursiveGetChildById('capLabel')
   conditionPanel = inventoryWindow:recursiveGetChildById('conditionPanel')
 
 
-  connect(LocalPlayer, { onStatesChange = onStatesChange,
-                         onSoulChange = onSoulChange,
-                         onFreeCapacityChange = onFreeCapacityChange })
+  connect(LocalPlayer, { onStatesChange = onStatesChange
+                        -- onSoulChange = onSoulChange,
+                        -- onFreeCapacityChange = onFreeCapacityChange
+						 })
 -- status end
   
   refresh()
@@ -167,8 +168,9 @@ function terminate()
   -- controls end
   -- status
   disconnect(LocalPlayer, { onStatesChange = onStatesChange,
-                         onSoulChange = onSoulChange,
-                         onFreeCapacityChange = onFreeCapacityChange })
+                        -- onSoulChange = onSoulChange,
+                        -- onFreeCapacityChange = onFreeCapacityChange
+						 })
   -- status end
 
   inventoryWindow:destroy()
@@ -197,8 +199,8 @@ function refresh()
     toggleAdventurerStyle(player and Bit.hasBit(player:getBlessings(), Blessings.Adventurer) or false)
   end
   if player then
-    onSoulChange(player, player:getSoul())
-    onFreeCapacityChange(player, player:getFreeCapacity())
+    --onSoulChange(player, player:getSoul())
+   -- onFreeCapacityChange(player, player:getFreeCapacity())
     onStatesChange(player, player:getStates(), 0)
   end
 
@@ -227,7 +229,7 @@ end
 
 -- hooked events
 function onInventoryChange(player, slot, item, oldItem)
-    local itemWidget = inventoryPanel:getChildById('slot' .. slot)
+    local itemWidget = inventoryPanel:getChildById('slot' .. slot )
     if itemWidget then
         if item then
             itemWidget:setStyle('InventoryItem')
@@ -452,24 +454,24 @@ function loadIcon(bitChanged)
   return icon
 end
 
-function onSoulChange(localPlayer, soul)
-  if not soul then return end
-  soulLabel:setText(tr('Soul') .. ':\n' .. soul)
-end
+--function onSoulChange(localPlayer, soul)
+--  if not soul then return end
+--  soulLabel:setText(tr('Soul') .. ':\n' .. soul)
+--end
 
-function onFreeCapacityChange(player, freeCapacity)
-  if not freeCapacity then return end
-  if freeCapacity > 99 then
-    freeCapacity = math.floor(freeCapacity * 10) / 10
-  end
-  if freeCapacity > 999 then
-    freeCapacity = math.floor(freeCapacity)
-  end
-  if freeCapacity > 99999 then
-    freeCapacity = math.min(9999, math.floor(freeCapacity/1000)) .. "k"
-  end
-  capLabel:setText(tr('Cap') .. ':\n' .. freeCapacity)
-end
+--function onFreeCapacityChange(player, freeCapacity)
+--  if not freeCapacity then return end
+--  if freeCapacity > 99 then
+--    freeCapacity = math.floor(freeCapacity * 10) / 10
+--  end
+--  if freeCapacity > 999 then
+--    freeCapacity = math.floor(freeCapacity)
+--  end
+--  if freeCapacity > 99999 then
+--    freeCapacity = math.min(9999, math.floor(freeCapacity/1000)) .. "k"
+--  end
+--  capLabel:setText(tr('Cap') .. ':\n' .. freeCapacity)
+--end
 
 function onStatesChange(localPlayer, now, old)
   if now == old then return end

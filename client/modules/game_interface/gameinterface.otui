@@ -139,7 +139,27 @@ UIWidget
     layout:
       type: horizontalBox
       fit-children: true
+
+  Panel
+    id: gameBottomActionPanel
+    phantom: true
+    focusable: false
     
+    $!mobile:
+      anchors.left: bottomSplitter.left
+      anchors.right: bottomSplitter.right
+      anchors.top: bottomSplitter.top
+      margin-top: 3
+    
+    $mobile:
+      anchors.left: gameLeftPanels.right
+      anchors.right: gameRightPanels.left
+      anchors.bottom: gameBottomPanel.top    
+      
+    layout:
+      type: verticalBox
+      fit-children: true
+
   Splitter
     id: bottomSplitter
     anchors.left: gameLeftPanels.right
@@ -153,27 +173,7 @@ UIWidget
     
     $mobile:
       visible: false
-      
-  Panel
-    id: gameBottomActionPanel
-    phantom: true
-    focusable: false
 
-    $!mobile:
-      anchors.left: bottomSplitter.left
-      anchors.right: bottomSplitter.right
-      anchors.top: bottomSplitter.top
-      margin-top: 3
-
-    $mobile:
-      anchors.left: gameLeftPanels.right
-      anchors.right: gameRightPanels.left
-      anchors.bottom: gameBottomPanel.top    
-      
-    layout:
-      type: verticalBox
-      fit-children: true
-    
   Panel
     id: gameBottomPanel    
     $!mobile:
@@ -192,6 +192,13 @@ UIWidget
     focusable: false
     visible: false
 
+  ResizeBorder
+    id: rightResizeBorder
+    anchors.right: parent.right
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    enabled: false
+
   Panel
     id: gameTopBar
     image-source: /images/ui/panel_bottom2
@@ -206,3 +213,4 @@ UIWidget
     layout:
       type: verticalBox
       fit-children: true
+  

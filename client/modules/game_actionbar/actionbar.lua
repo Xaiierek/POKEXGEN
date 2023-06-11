@@ -89,37 +89,28 @@ function terminate()
 end
 
 function createActionBars()
-  local bottomPanel = modules.game_interface.getBottomActionPanel()
-  local leftPanel = modules.game_interface.getLeftActionPanel()
-  local rightPanel = modules.game_interface.getRightActionPanel()
+local bottomPanel = modules.game_interface.getBottomActionPanel()
 
-  -- 1-3: bottom
-  -- 4-6: left
-  -- 7-9: right
-  for i=1,9 do
-    local parent
-    local index
-    local layout
 
-    if i <= 3 then
-      parent = bottomPanel
-      index = i
-      layout = 'actionbar'
-    elseif i <= 6 then
-      parent = leftPanel
-      index = i - 3
-      layout = 'sideactionbar'
-    else
-      parent = rightPanel
-      index = i - 6
-      layout = 'sideactionbar'
-    end
+-- 1-3: bottom
+-- 4-6: left
+-- 7-9: right
+for i=1,3 do
+  local parent
+  local index
+  local layout
 
-    actionBars[i] = g_ui.loadUI(layout, parent)
-    actionBars[i]:setId("actionbar."..i)
-    actionBars[i].n = i
-    parent:moveChildToIndex(actionBars[i], index)
+  if i <= 3 then
+    parent = bottomPanel
+    index = i
+    layout = 'actionbar'
   end
+
+  actionBars[i] = g_ui.loadUI(layout, parent)
+ -- actionBars[i]:setId("actionbar."..i)
+  actionBars[i].n = i
+  parent:moveChildToIndex(actionBars[i], index)
+end
 end
 
 function offline()

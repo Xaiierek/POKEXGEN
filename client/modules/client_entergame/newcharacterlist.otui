@@ -106,6 +106,15 @@ CharacterWidget < UIWidget
     margin-left: 10
 
   UIWidget
+    //ICONE DO CLA
+    id: outfitBox
+    size: 70 70
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 110
+    margin-left: 10
+
+  UIWidget
     id: pokemon1
     color: #5C5C5C
     anchors.bottom: parent.bottom
@@ -187,6 +196,15 @@ MainWindow
     anchors.bottom: parent.bottom
     anchors.left: parent.left
     margin-bottom: 75
+    margin-left: 20
+
+  UICreature
+    //ICONE DO CLA
+    id: Outfit
+    size: 30 30
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    margin-bottom: 105
     margin-left: 20
 
   ScrollableFlatPanel

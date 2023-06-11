@@ -83,6 +83,25 @@ function g_tooltip.display(text)
   toolTipLabel:setText(text)
   toolTipLabel:resizeToText()
   toolTipLabel:resize(toolTipLabel:getWidth() + 4, toolTipLabel:getHeight() + 4)
+  
+--if itemId then
+--  local itemWidget = g_ui.createWidget('UIItem', toolTipLabel)
+--	itemWidget:setId('toolTipItem')
+--	itemWidget:setItemId(itemId)
+--	itemWidget:setPosition(0, 0) -- Ustaw pozycję widgetu UIItem wewnątrz tooltipa
+--else
+--  local itemWidget = toolTipLabel:getChildById('toolTipItem')
+--  if itemWidget then
+--	itemWidget:destroy()
+--  end
+--end
+  
+  
+  
+  
+  
+  
+  
   toolTipLabel:show()
   toolTipLabel:raise()
   toolTipLabel:enable()
