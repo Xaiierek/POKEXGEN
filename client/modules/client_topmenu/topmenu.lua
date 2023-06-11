@@ -43,7 +43,7 @@ end
 
 -- public functions
 function init()
-  connect(g_game, { onGameStart = online,
+  connect(g_game, { onGameStart = offline,
                     onGameEnd = offline,
                     onPingBack = updatePing })
 

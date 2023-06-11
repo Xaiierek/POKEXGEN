@@ -74,7 +74,7 @@ Panel
     text-auto-resize: true
     width: 120
     padding: 2
-    font: verdana-11px-monochrome
+    font: bebasek
 
 
 //BACKGROUND SLIDE

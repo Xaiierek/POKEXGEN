@@ -1,0 +1,9 @@
+Module
+  name: game_iteminfo
+  description: Pokemon Info module
+  author: Xaii
+  sandboxed: true
+  scripts: [ iteminfo ]
+  autoload: true
+  @onLoad: init()
+  @onUnload: terminate()

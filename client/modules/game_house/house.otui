@@ -1,5 +1,5 @@
 HouseData < UILabel
-  font: sans-bold-16px
+  font: bebasek
   anchors.left: parent.left
   anchors.top: prev.bottom
   color: #abaaaa
@@ -39,7 +39,7 @@ MainWindow
 
       Label
         id: house_map_name
-        font: sans-bold-16px
+        font: bebasek
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left

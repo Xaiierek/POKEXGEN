@@ -1,25 +1,28 @@
-local playerTitles = {["GOD Pota"] = {title = "[Admin]", color = "#FFFFFF"}}
-local titleFont = "lucida-11px-rounded"
-function init()
+local playerTitles = {["GOD Pota"] = {title = "[DEV]", color = "#FFFFFF"}}
+local titleFont = "bebasek"
 
+function init()
   connect(Creature, {
     onAppear = updateTitle,
   })  
 end
 
 function terminate()
-
-disconnect(Creature, {
+  disconnect(Creature, {
     onAppear = updateTitle,
   })  
 end
 
 function updateTitle(creature)
     local name = creature:getName()
-    --removed unused monster level code for you
     if creature:isPlayer() then
         if playerTitles[name] then
-            creature:setTitle(playerTitles[name].title, titleFont, playerTitles[name].color)
+		local title = playerTitles[name].title
+		local titleColor = playerTitles[name].color
+		local newName = title .. " " .. name
+			--creature:setTitle(playerTitles[name].title, titleFont, playerTitles[name].color)
+			creature:setName(newName)
+			
         end
     end
 end

@@ -1,5 +1,5 @@
 Button < UIButton
-  font: lucida-11px-rounded
+  font: bebasek
   color: #dfdfdfff
   size: 106 23
   text-offset: 0 1

@@ -1,76 +1,70 @@
 PokemonData < UILabel
-  font: sans-bold-16px
+  font: bebasek
   anchors.left: parent.left
   anchors.top: prev.bottom
   color: #abaaaa
-  margin-top: 6
+  margin-top: 8
   height: 20
   text-auto-resize: true
 
 MainWindow
   id: pokemonLookWindow
   !text: tr('Pokemon Information')
-  size: 530 180
+  font: lucida-11px-rounded
+  size: 180 190
+  draggable: false
   focusable: false
   @onEnter: onClosePokemonInformation()
   @onEscape: onClosePokemonInformation()
+  @onClick: onClosePokemonInformation()
 
   Panel
     id: full_content
+    margin: 1 1 1 10
     anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
     anchors.left: parent.left
     anchors.bottom: parent.bottom
     anchors.right: parent.right
-    
-    Panel
-      id: left_image
-      anchors.top: parent.top
-      anchors.left: parent.left
-      anchors.bottom: parent.bottom
-      size: 140 140
 
-      Label
-        id: poke
-        font: sans-bold-16px
+    Panel
+      id: center_panel
+      image-source: images/ui/ball
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      size: 70 70
+
+      Panel
+        id: imagePanel
         anchors.top: parent.top
-        anchors.left: parent.left
+        focusable: false
         anchors.bottom: parent.bottom
-        color: #abaaaa
-        margin-top: 5
-        margin-bottom: 5
+        size: 70 50
 
     Panel
-      id: right_content
-      anchors.top: parent.top
-      anchors.left: left_image.right
-      anchors.right: parent.right
+      id: info_panel
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: center_panel.bottom
       anchors.bottom: parent.bottom
-      margin-left: 10
+      margin-top: 10
+      size: 150 150
 
       Label
         id: pokemon_name
         font: sans-bold-16px
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.left: parent.left
-        color: #abaaaa
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: white
+        text-auto-resize: true
         margin-top: 5
-        margin-bottom: 5
 
       PokemonData
         id: pokemon_level
-        anchors.top: prev.bottom
-        margin-top: 10
+        font: lucida-11px-rounded
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin-top: 5
 
       PokemonData
         id: pokemon_boost
-        margin-top: 10
-
-      Button
-        id: closed_button
-        !text: tr("Close")
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        margin: 10
-        focusable: false
-        @onClick: onClosePokemonInformation()
+        font: lucida-11px-rounded
+        anchors.horizontalCenter: parent.horizontalCenter
+        margin-top: 5

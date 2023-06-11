@@ -11,7 +11,7 @@ LeavingWindow < MainWindow
     anchors.left: parent.left
 
   Label
-    font: sans-bold-16px
+    font: bebasek
     text-auto-resize: true
     margin-top: 15
     text-align: center

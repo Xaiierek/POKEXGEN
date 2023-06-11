@@ -224,7 +224,7 @@ bool LocalPlayer::predictiveCancelWalk(const Position& pos, uint32_t predictionI
         }
 
         m_walkTimer.restart();
-        m_walkTimer.adjust(-(getStepDuration(true) + 50));
+        m_walkTimer.adjust(-(getStepDuration() + 50));
         updateWalk();
         g_map.requestVisibleTilesCacheUpdate();
 

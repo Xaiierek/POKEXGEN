@@ -2,12 +2,13 @@ Character < Creature
   fixed-creature-size: true
   anchors.top: parent.top
   anchors.left: parent.left
+  size: 100 100
   margin-top: 45
-  margin-left: 140
+  margin-left: 40
   image-source: ~
 
 CharacterWidget < UIWidget
-  image-source: /images/trainerCards/trainer.png
+  image-source: /images/trainerCards/trainer
   margin: 4
   size: 190 20
   &updateOnStates: |
@@ -31,7 +32,7 @@ CharacterWidget < UIWidget
     anchors.left: parent.left
     margin-top: 5
     margin-left: 15
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
   
     $on:
@@ -44,7 +45,7 @@ CharacterWidget < UIWidget
     anchors.left: parent.left
     margin-top: 24
     margin-left: 15
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
   
     $on:
@@ -57,7 +58,7 @@ CharacterWidget < UIWidget
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
     margin-top: 12
     margin-left: 15
@@ -73,7 +74,7 @@ CharacterWidget < UIWidget
     anchors.left: ClaICON.left
     margin-left: 310
     margin-top: 15
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
     text-align: center
     &baseText: '%s'
@@ -88,7 +89,7 @@ CharacterWidget < UIWidget
     anchors.left: ClaICON.left
     margin-left: 43
     margin-top: 13
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
     text-align: center
 
@@ -198,15 +199,6 @@ MainWindow
     margin-bottom: 75
     margin-left: 20
 
-  UICreature
-    //ICONE DO CLA
-    id: Outfit
-    size: 30 30
-    anchors.bottom: parent.bottom
-    anchors.left: parent.left
-    margin-bottom: 105
-    margin-left: 20
-
   ScrollableFlatPanel
     id: characters
     anchors.top: parent.top
@@ -219,6 +211,7 @@ MainWindow
     margin-right: 18
     image-source: ~
     padding: 0
+    border: 1 white
     layout:
       type: horizontalBox
       cell-size: 404 224

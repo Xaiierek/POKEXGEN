@@ -32,14 +32,14 @@ StaticText::StaticText()
 {
     m_mode = Otc::MessageNone;
     m_color = Color::white;
-    m_cachedText.setFont(g_fonts.getFont("verdana-11px-rounded"));
+    m_cachedText.setFont(g_fonts.getFont("bebasek"));
     m_cachedText.setAlign(Fw::AlignCenter);
 }
 
 void StaticText::drawText(const Point& dest, const Rect& parentRect)
 {
     Size textSize = m_cachedText.getTextSize();
-    Rect rect = Rect(dest - Point(textSize.width() / 2, textSize.height()) + Point(20, 5), textSize);
+    Rect rect = Rect(dest - Point(textSize.width() / 2, textSize.height()) + Point(10, -5), textSize);
     Rect boundRect = rect;
     boundRect.bind(parentRect);
 

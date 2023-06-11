@@ -64,7 +64,7 @@ Creature::Creature() : Thing()
     m_icon = Otc::NpcIconNone;
     m_lastStepDirection = Otc::InvalidDirection;
     m_footLastStep = 0;
-    m_nameCache.setFont(g_fonts.getFont("lucida-11px-rounded"));
+    m_nameCache.setFont(g_fonts.getFont("bebasek"));
     m_nameCache.setAlign(Fw::AlignTopCenter);
     m_footStep = 0;
     //m_speedFormula.fill(-1);
@@ -151,17 +151,17 @@ void Creature::drawInformation(const Point& point, bool useGray, const Rect& par
 
     //debug            
     if (g_extras.debugWalking) {
-        int footDelay = (getStepDuration(true)) / 3;
+        int footDelay = (getStepDuration()) / 3;
         int footAnimPhases = getWalkAnimationPhases() - 1;
         m_nameCache.setText(stdext::format("%i %i %i %i %i\n %i %i\n%i %i %i\n%i %i %i %i %i",
-            (int)m_stepDuration, (int)getStepDuration(true), getStepDuration(false), (int)m_walkedPixels, (int)m_walkTimer.ticksElapsed(),
+            (int)m_stepDuration, (int)getStepDuration(), getStepDuration(false), (int)m_walkedPixels, (int)m_walkTimer.ticksElapsed(),
                                            (int)m_walkOffset.x, (int)m_walkOffset.y,
                                            (int)m_speed, (int)getTile()->getGroundSpeed(), (int)g_game.getWalkId(),
                                            (int)(g_clock.millis() - m_footLastStep), (int)footDelay, (int)footAnimPhases, (int)m_walkAnimationPhase, (int)stdext::millis()));
     }
 
     Size nameSize = m_nameCache.getTextSize();
-    Rect textRect = Rect(point.x + m_informationOffset.x - nameSize.width() / 2.0, point.y + m_informationOffset.y - 12, nameSize);
+    Rect textRect = Rect(point.x + m_informationOffset.x - nameSize.width() / 2.0, point.y + m_informationOffset.y - 16, nameSize);
     textRect.bind(parentRect);
 
     // distance them
@@ -486,9 +486,9 @@ void Creature::updateWalkAnimation(uint8 totalPixelsWalked)
 
     int footAnimPhases = getWalkAnimationPhases() - 1;
     // TODO, should be /2 for <= 810
-    uint16 footDelay = getStepDuration(true);
+    uint16 footDelay = getStepDuration();
     if (footAnimPhases > 0) {
-        footDelay = ((getStepDuration(true) + 20) / (g_game.getFeature(Otc::GameFasterAnimations) ? footAnimPhases * 2 : footAnimPhases));
+        footDelay = ((getStepDuration() + 20) / (g_game.getFeature(Otc::GameFasterAnimations) ? footAnimPhases * 2 : footAnimPhases));
     }
     if (!g_game.getFeature(Otc::GameFasterAnimations))
         footDelay += 10;
@@ -588,7 +588,7 @@ void Creature::nextWalkUpdate()
         self->m_walkUpdateEvent = nullptr;
         self->nextWalkUpdate();
     }, g_game.getFeature(Otc::GameNewUpdateWalk) ? 
-        std::max(getStepDuration(true) / std::max(g_app.getFps(), 1), 1) : (float)getStepDuration() / g_sprites.spriteSize()
+        std::max(getStepDuration() / std::max(g_app.getFps(), 1), 1) : (float)getStepDuration() / g_sprites.spriteSize()
     );
 }
 
@@ -926,7 +926,7 @@ uint16 Creature::getStepDuration(bool ignoreDiagonal, Otc::Direction dir)
 
     if (!ignoreDiagonal && (m_lastStepDirection == Otc::NorthWest || m_lastStepDirection == Otc::NorthEast ||
                             m_lastStepDirection == Otc::SouthWest || m_lastStepDirection == Otc::SouthEast))
-        interval *= factor;
+        interval *= 1;
 
     if (!isServerWalking() && g_game.getFeature(Otc::GameSlowerManualWalking)) {
         interval += 25;

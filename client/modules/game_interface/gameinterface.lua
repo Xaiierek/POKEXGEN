@@ -111,6 +111,15 @@ end
 --  g_keyboard.unbindKeyPress(key, gameRootPanel)
 --end
 
+
+
+function ReloadCharacter()
+  g_game.safeLogout()
+  modules.game_bottommenu.hide()
+  scheduleEvent(function() modules.client_entergame.CharacterReload() end, 100)
+  --scheduleEvent(function() modules.client_background.ReloadCharacterTime() end, 100)
+end
+
 function terminate()
   hide()
 
@@ -163,7 +172,7 @@ function show()
       gameMapPanel:setMaxZoomOut(513)
       gameMapPanel:setLimitVisibleRange(false)
     else
-      gameMapPanel:setMaxZoomOut(15)
+      gameMapPanel:setMaxZoomOut(12)
       gameMapPanel:setLimitVisibleRange(true)
     end
   end)
@@ -454,9 +463,9 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
       menu:addOption(tr('Unwrap'), function() g_game.wrap(useThing) end)
     end
 
-    if g_game.getFeature(GameBrowseField) and useThing:getPosition().x ~= 0xffff then
-      menu:addOption(tr('Browse Field'), function() g_game.browseField(useThing:getPosition()) end)
-    end
+    --if g_game.getFeature(GameBrowseField) and useThing:getPosition().x ~= 0xffff then
+    --  menu:addOption(tr('Browse Field'), function() g_game.browseField(useThing:getPosition()) end)
+    --end
   end
 
   if lookThing and not lookThing:isCreature() and not lookThing:isNotMoveable() and lookThing:isPickupable() then
@@ -478,17 +487,17 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
     if creatureThing:isLocalPlayer() then
       menu:addOption(tr('Set Outfit'), function() g_game.requestOutfit() end)
 
-      if g_game.getFeature(GamePlayerMounts) then
-        if not localPlayer:isMounted() then
-          menu:addOption(tr('Mount'), function() localPlayer:mount() end)
-        else
-          menu:addOption(tr('Dismount'), function() localPlayer:dismount() end)
-        end
-      end
+     -- if g_game.getFeature(GamePlayerMounts) then
+     --   if not localPlayer:isMounted() then
+     --     menu:addOption(tr('Mount'), function() localPlayer:mount() end)
+     --   else
+     --     menu:addOption(tr('Dismount'), function() localPlayer:dismount() end)
+     --   end
+     -- end
       
-      if g_game.getFeature(GamePrey) and modules.game_prey then
-        menu:addOption(tr('Open Prey Dialog'), function() modules.game_prey.show() end)
-      end
+     --if g_game.getFeature(GamePrey) and modules.game_prey then
+     --  menu:addOption(tr('Open Prey Dialog'), function() modules.game_prey.show() end)
+     --end
       
       if creatureThing:isPartyMember() then
         if creatureThing:isPartyLeader() then

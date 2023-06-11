@@ -49,17 +49,17 @@ TopMenuButtonsPanel < Panel
 TopMenuPanel < Panel
   height: 36
   image-source: /images/ui/panel_top
-  image-repeated: true
+  image-repeated: false
   focusable: false
 
 TopMenuFrameCounterLabel < Label
-  font: verdana-11px-rounded
+  font: bebasek
   color: white
   margin-top: 4
   margin-left: 5
 
 TopMenuPingLabel < Label
-  font: verdana-11px-rounded
+  font: bebasek
 
 TopMenu < TopMenuPanel
   id: topMenu
@@ -71,7 +71,7 @@ TopMenu < TopMenuPanel
     id: leftButtonsPanel
     anchors.top: parent.top
     anchors.bottom: parent.bottom
-    anchors.left: parent.left
+
 
   TopMenuButtonsPanel
     id: leftGameButtonsPanel

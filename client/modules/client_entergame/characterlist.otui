@@ -19,7 +19,7 @@ CharacterWidget < UIWidget
     color: #aaaaaa
     anchors.top: parent.top
     anchors.left: parent.left
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
     background-color: alpha
     text-offset: 2 0
@@ -34,7 +34,7 @@ CharacterWidget < UIWidget
     anchors.top: parent.top
     anchors.right: parent.right
     margin-right: 5
-    font: verdana-11px-monochrome
+    font: bebasek
     text-auto-resize: true
     background-color: alpha
     &baseText: '(%s)'

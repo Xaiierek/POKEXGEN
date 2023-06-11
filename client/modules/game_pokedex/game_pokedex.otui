@@ -1,5 +1,5 @@
 PokedexData < UIWindow
-  font: verdana-11px-rounded
+  font: bebasek
   anchors.left: parent.left
   anchors.top: prev.bottom
   color: #abaaaa
@@ -23,7 +23,7 @@ MainWindow
       id: pokemon_label
       anchors.top: parent.top
       anchors.left: parent.left
-      font: verdana-11px-rounded
+      font: bebasek
       color: #abaaaa
       margin-top: 5
       margin-left: 5
@@ -33,7 +33,7 @@ MainWindow
       id: type_label
       anchors.right: parent.right
       anchors.top: parent.top
-      font: verdana-11px-rounded
+      font: bebasek
       color: #abaaaa
       size: 24 25
       margin-top: 5
@@ -43,7 +43,7 @@ MainWindow
       id: type_label2
       anchors.right: parent.right
       anchors.top: type_label.top
-      font: verdana-11px-rounded
+      font: bebasek
       color: #abaaaa
       size: 24 25
       margin-top: 30
@@ -71,7 +71,7 @@ MainWindow
 
   Panel
     id: movelist_label
-    font: verdana-11px-rounded
+    font: bebasek
     anchors.top: separator.top
     anchors.left: parent.left
     anchors.bottom: closed_button.bottom

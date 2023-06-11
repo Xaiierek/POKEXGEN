@@ -1,12 +1,12 @@
 LocalesMainLabel < Label
-  font: sans-bold-16px
+  font: bebasek
 
 LocalesButton < UIWidget
   size: 96 96
   image-size: 96 96
   image-smooth: true
   text-offset: 0 96
-  font: verdana-11px-antialised
+  font: bebasek
 
 UIWindow
   id: localesWindow

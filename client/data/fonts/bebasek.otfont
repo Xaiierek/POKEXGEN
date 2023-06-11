@@ -1,0 +1,10 @@
+Font
+  name: bebasek
+  texture: bebasek
+  height: 16
+  width: 5
+  glyph-size: 32 32
+  y-offset: 0
+  spacing: 0 0
+  space-width: 3
+

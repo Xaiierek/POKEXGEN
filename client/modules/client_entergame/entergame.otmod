@@ -10,4 +10,3 @@ Module
   load-later:
     - game_things
     - game_features
-    - game_areas

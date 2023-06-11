@@ -1,0 +1,68 @@
+MainWindow
+  id: itemLookWindow
+  font: lucida-11px-rounded
+  image-auto-resize: true
+  focusable: false
+  draggable: false
+  @onEnter: onCloseItemInformation()
+  @onEscape: onCloseItemInformation()
+  @onClick: onCloseItemInformation()
+
+  Panel
+    id: full_content
+    margin: 1 1 1 10
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.left: parent.left
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+
+    Panel
+      id: center_panel
+      image-source: images/ui/ball
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      size: 50 50
+    
+      UIItem
+        id: imagePanel
+        anchors.top: parent.top
+        focusable: false
+        phantom: true
+        anchors.bottom: parent.bottom
+        old-scalling: true
+        size: 50 50
+
+    Panel
+      id: info_panel
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: center_panel.bottom
+      anchors.bottom: parent.bottom
+      margin-top: 15
+      size: 250 150
+
+    
+      Label
+        id: item_name
+        font: sans-bold-16px
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: white
+        text-auto-resize: true
+        margin-top: 25
+
+
+      Panel
+        id: item_contents
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: item_name.bottom
+        anchors.right: parent.right
+        margin-top: 15
+        margin-right: 5
+        margin-bottom: 10
+        size: 150 190
+        layout:
+          type: grid
+          cell-size: 22 22
+          cell-spacing: 1
+          num-columns: 10
+          fit-children: true

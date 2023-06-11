@@ -186,11 +186,13 @@ function updateFeatures(version)
     if(version >= 1098) then
       g_game.enableFeature(GameSpritesAlphaChannel)
 	  g_game.enableFeature(GameMagicEffectU16)
+	  g_game.enableFeature(GameSpritesU32)
 	  -- g_game.enableFeature(GameDistanceEffectU16)
 	  g_game.enableFeature(GameDistanceShootU16)
 	  g_game.enableFeature(GameDiagonalAnimatedText)
 	  g_game.enableFeature(GameEnhancedAnimations)
 	  g_game.enableFeature(GameExtendedOpcode)
+	  g_game.enableFeature(GameIdleAnimations)
     end
     
     if(version >= 1100) then

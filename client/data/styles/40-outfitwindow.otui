@@ -273,7 +273,7 @@ OutfitWindow < MainWindow
           anchors.top: parent.top
           anchors.left: parent.left
           anchors.right: parent.right
-          font: verdana-11px-rounded
+          font: bebasek
           color: #00BC00
           text-align: center
         
@@ -621,7 +621,7 @@ OutfitWindow < MainWindow
     anchors.left: preview.right
     anchors.right: parent.right
     margin-left: 5
-    padding-left: 21
+    padding-left: 4
     height: 50
     text: Manage Presets
     layout:
@@ -630,26 +630,26 @@ OutfitWindow < MainWindow
 
     Button
       text: New
-      width: 43
-      font: cipsoftFont
+      width: 48
+      font: bebasek
       @onClick: modules.game_outfit.newPreset()
 
     Button
       text: Rename
-      width: 43
-      font: cipsoftFont
+      width: 57
+      font: bebasek
       @onClick: modules.game_outfit.renamePreset()
 
     Button
       text: Save
-      width: 43
-      font: cipsoftFont
+      width: 48
+      font: bebasek
       @onClick: modules.game_outfit.savePreset()
 
     Button
       text: Delete
-      width: 43
-      font: cipsoftFont
+      width: 48
+      font: bebasek
       @onClick: modules.game_outfit.deletePreset()
 
   MiniPanel

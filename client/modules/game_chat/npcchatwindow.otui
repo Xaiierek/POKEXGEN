@@ -1,7 +1,7 @@
 NpcDialogCheckBox < CheckBox
   @onCheckChange: modules.console.setNpcDialogOption(self:getId(), self:isChecked())
   height: 16
-  font: terminus-14px-bold
+  font: bebasek
   image-source: /images/ui/checkbox_light
   text-wrap: true
   text-auto-resize: true

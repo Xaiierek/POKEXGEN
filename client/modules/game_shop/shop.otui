@@ -15,7 +15,7 @@ ShopCategory < Panel
     margin-left: 40
     text-align: left
     color: white
-    font: verdana-11px-rounded    
+    font: bebasek 
     
 ShopCategoryItem < ShopCategory
   UIItem
@@ -69,7 +69,7 @@ ShopOffer < Panel
     margin-left: 55
     text-align: topleft
     color: white
-    font: verdana-11px-rounded
+    font: bebasek
 
   Label
     id: description
@@ -83,7 +83,7 @@ ShopOffer < Panel
     text-auto-resize: true
     text-wrap: true
     color: white
-    font: verdana-11px-rounded
+    font: bebasek
     
   Button
     id: buyButton
@@ -177,7 +177,7 @@ MainWindow
       text-auto-resize: true
       text-wrap: true
       text-align: center
-      font: sans-bold-16px
+      font: bebasek
   
   TextList    
     id: categories

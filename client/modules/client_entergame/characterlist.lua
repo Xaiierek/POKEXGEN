@@ -37,6 +37,7 @@ local function tryLogin(charInfo, tries)
   g_game.loginWorld(G.account, G.password, charInfo.worldName, charInfo.worldHost, charInfo.worldPort, charInfo.characterName, G.authenticatorToken, G.sessionKey)
  -- g_logger.info("Login to " .. charInfo.worldHost .. ":" .. charInfo.worldPort)
   loadBox = displayCancelBox(tr('Please wait'), tr('Connecting to game server...'))
+
   connect(loadBox, { onCancel = function()
                                   loadBox = nil
                                   g_game.cancelLogin()
@@ -265,7 +266,8 @@ function CharacterList.create(characters, account, otui)
 
   charactersWindow = g_ui.displayUI(otui)
   characterList = charactersWindow:getChildById('characters')
-  
+
+
  
  -- autoReconnectButton = charactersWindow:getChildById('autoReconnect')
 
@@ -283,23 +285,16 @@ function CharacterList.create(characters, account, otui)
 	
 	local vocationId = characterInfo.vocationId
     if vocationId then
-       -- widget:setImageSource('/images/trainerCards/' .. getVocationName(characterInfo.vocationId))
+      -- widget:setImageSource('/images/trainerCards/' .. getVocationName(characterInfo.vocationId))
        local vocationLabel = widget:getChildById('vocation')
 		vocationLabel:setText("Vocation: " .. getVocationName(characterInfo.vocationId))
-   -- else
-       -- print("Vocation ID is missing for character: " .. characterInfo.name)
     end
-   -- print("Character: " .. characterInfo.name .. ", Vocation ID: " .. tostring(vocationId))
-
-
-
 	local serwerLabel = widget:getChildById('serwer')
 	serwerLabel:setText("World: " .. characterInfo.worldName)
 	
 
-	
-    --g_ui.createWidget('Character', widget):getOutfit(characterInfo.outfit)
-	
+    g_ui.createWidget('Character', widget):setOutfit(characterInfo.outfit)
+
 	
     for key,value in pairs(characterInfo) do
       local subWidget = widget:getChildById(key)
@@ -411,27 +406,27 @@ function CharacterList.isVisible()
   return false
 end
 
-function CharacterList.doLogin()
- --removeEvent(autoReconnectEvent)
- --autoReconnectEvent = nil
-
-  local selected = characterList:getFocusedChild()
-  if selected then
-    local charInfo = { worldHost = selected.worldHost,
-                       worldPort = selected.worldPort,
-                       worldName = selected.worldName,
-					   Vocation = selected.vocation,
-                       characterName = selected.characterName }
-    charactersWindow:hide()
-    if loginEvent then
-      removeEvent(loginEvent)
-      loginEvent = nil
-    end
-    tryLogin(charInfo)
-  else
-    displayErrorBox(tr('Error'), tr('You must select a character to login!'))
-  end
-end
+--function CharacterList.doLogin()
+-- --removeEvent(autoReconnectEvent)
+-- --autoReconnectEvent = nil
+--
+--  local selected = characterList:getFocusedChild()
+--  if selected then
+--    local charInfo = { worldHost = selected.worldHost,
+--                       worldPort = selected.worldPort,
+--                       worldName = selected.worldName,
+--					   Vocation = selected.vocation,
+--                       characterName = selected.characterName }
+--    charactersWindow:hide()
+--    if loginEvent then
+--      removeEvent(loginEvent)
+--      loginEvent = nil
+--    end
+--    tryLogin(charInfo)
+--  else
+--    displayErrorBox(tr('Error'), tr('You must select a character to login!'))
+--  end
+--end
 
 function CharacterList.destroyLoadBox()
   if loadBox then
@@ -459,4 +454,35 @@ function CharacterList.cancelWait()
   CharacterList.destroyLoadBox()
   CharacterList.showAgain()
 end
+
+function CharacterList.doLogin()
+  local selected = characterList:getFocusedChild()
+  if selected then
+    local charInfo = { worldHost = selected.worldHost,
+                       worldPort = selected.worldPort,
+                       worldName = selected.worldName,
+                       characterName = selected.characterName }
+    charactersWindow:hide()
+    tryLogin(charInfo)
+  else
+    displayErrorBox(tr('Error'), tr('You must select a character to login!'))
+  end
+end
+
+function CharacterReload()
+  charactersWindow:setOpacity(0)
+  scheduleEvent(function() charactersWindow:setOpacity(1) end, 39900)
+  scheduleEvent(function() CharacterList.doLogin() end, 40000)
+end
+
+
+function CharacterList.updateCharacter(characterInfo)
+  for i, widget in pairs(characterList:recursiveGetChildren()) do
+    if widget.characterName == characterInfo.name then
+      if characterInfo.worldName then widget:getChildById("serwer"):setText("("..characterInfo.worldName..")") end
+      if characterInfo.outfit then widget:getChildById("Character"):setOutfit(characterInfo.outfit) end
+    end
+  end
+end
+
 

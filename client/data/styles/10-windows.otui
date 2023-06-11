@@ -1,5 +1,5 @@
 Window < UIWindow
-  font: lucida-11px-rounded
+  font: bebasek
   size: 200 200
   opacity: 1
   color: #dfdfdf

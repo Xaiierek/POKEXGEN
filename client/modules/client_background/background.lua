@@ -8,7 +8,7 @@ function init()
   background:lower()
 
   clientVersionLabel = background:getChildById('clientVersionLabel')
-  clientVersionLabel:setText('GxPV8 ' .. g_app.getVersion() .. '\nrev ' .. g_app.getBuildRevision() .. '\nMade by:\n' .. g_app.getAuthor() .. "")
+  clientVersionLabel:setText('PxP ' .. g_app.getVersion() .. '\nrev ' .. g_app.getBuildRevision() .. '\nMade by:\n' .. g_app.getAuthor() .. "")
   
   if not g_game.isOnline() then
     addEvent(function() g_effects.fadeIn(clientVersionLabel, 1500) end)
@@ -28,6 +28,7 @@ function terminate()
 
   g_effects.cancelFade(background:getChildById('clientVersionLabel'))
   background:destroy()
+  
 
   Background = nil
 end
@@ -35,8 +36,8 @@ end
 function hide()
   background:hide()
   local name = g_game.getCharacterName()
-  g_window.setTitle("GenoXPokemon | Player: "..name)
-  --modules.game_bottommenu.show()
+  g_window.setTitle("PokeXpulse | Player: "..name)
+
   removeEvent(myLoopEventId1)
   removeEvent(myLoopEventId2)
   removeEvent(myLoopEventId3)

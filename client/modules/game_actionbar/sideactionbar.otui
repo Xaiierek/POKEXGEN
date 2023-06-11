@@ -69,7 +69,7 @@ SideActionButton < UIButton
     focusable: false
     phantom: true
     anchors.fill: parent
-    font: verdana-11px-rounded
+    font: bebasek
     color: white
 
 TopSliders < Panel

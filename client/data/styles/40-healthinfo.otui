@@ -11,7 +11,7 @@ SoulLabel < GameLabel
   id: soulLabel
   text-align: right
   color: white
-  font: verdana-11px-rounded
+  font: bebasek
   anchors.bottom: parent.bottom
   anchors.right: parent.right
   anchors.left: parent.horizontalCenter
@@ -27,7 +27,7 @@ SoulLabel < GameLabel
 CapLabel < GameLabel
   id: capLabel
   color: white
-  font: verdana-11px-rounded
+  font: bebasek
   anchors.bottom: parent.bottom
   anchors.left: parent.left
   anchors.right: parent.horizontalCenter

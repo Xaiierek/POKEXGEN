@@ -412,7 +412,17 @@ locale = {
     ["Sorcerer"] = "Czarodziej",
     ["Druid"] = false,
     ["Paladin"] = "Paladyn",
-    ["Knight"] = "Rycerz"
+    ["Knight"] = "Rycerz",
+    ["You cannot use revive while your Pokemon is summoned."] = "Nie mozesz uzyc revive kiedy twoj pokemon jest przywolany.",
+    ["Can you get some items for me? \n I will reward you accordingly."] = "Przyniesiesz mi kilka przedmiotow?",
+    ["Good Job! You did it!"] = "Dobra robota!",
+    ["You don't have all the required items."] = "Nie masz potrzebnych przedmiotów.",
+    ["See ya!"] = "Do zobaczenia!",
+    ["Ok"] = "Okej",
+    ["Cancel"] = "Anuluj",
+    ["help"] = "Pomoc",
+    ["Help"] = "Pomoc",
+    ["yes"] = "Tak"
   }
 }
 

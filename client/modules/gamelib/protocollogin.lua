@@ -245,6 +245,13 @@ function ProtocolLogin:parseCharacterList(msg)
       character.worldIp = worlds[worldId].worldIp
       character.worldPort = worlds[worldId].worldPort
       character.previewState = worlds[worldId].previewState
+	  character.outfit = {type = 612, head = 0, body = 0, legs = 0, feet = 0}
+      character.outfit.type = msg:getU16()
+      character.outfit.head = msg:getU8()
+      character.outfit.body = msg:getU8()
+      character.outfit.legs = msg:getU8()
+      character.outfit.feet = msg:getU8()
+	  character.outfit.addons = msg:getU8()
       characters[i] = character
     end
 

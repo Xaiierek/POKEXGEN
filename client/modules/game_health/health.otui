@@ -54,7 +54,7 @@ SoulLabel < GameLabel
   id: soulLabel
   text-align: right
   color: white
-  font: verdana-11px-rounded
+  font: bebasek
   anchors.bottom: parent.bottom
   anchors.right: parent.right
   anchors.left: parent.horizontalCenter
@@ -107,7 +107,7 @@ HeadlessWindow
 
   Label
     id: healthLabel
-    font: terminus-10px
+    font: bebasek
     anchors.top: prev.top
     anchors.left: prev.right
     margin: -2 0 0 8
@@ -119,7 +119,7 @@ HeadlessWindow
 
   Label
     id: experienceLabel
-    font: terminus-10px
+    font: bebasek
     anchors.top: prev.top
     anchors.left: prev.right
     margin: -3 0 0 7
@@ -131,7 +131,7 @@ HeadlessWindow
 
   Label
     id: fishLabel
-    font: terminus-10px
+    font: bebasek
     anchors.top: prev.top
     anchors.left: prev.right
     margin: -3 0 0 5

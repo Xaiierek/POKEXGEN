@@ -3,6 +3,6 @@ Font
   texture: lucida-11px-rounded_cp1252
   height: 16
   glyph-size: 16 16
-  y-offset: -2
-  spacing: -1 -5
-  space-width: 6
+  y-offset: 0
+  spacing: 0 0
+  space-width: 8

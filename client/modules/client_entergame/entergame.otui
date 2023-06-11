@@ -253,6 +253,7 @@ EnterGameWindow
     anchors.left: parent.left
     anchors.top: rememberPasswordBox.bottom
     @onClick: EnterGame.doLogin()
+    @onEnter: EnterGame.doLogin()
     margin-top: 37
     margin-left: 62
 

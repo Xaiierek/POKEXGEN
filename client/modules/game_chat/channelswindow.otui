@@ -1,5 +1,5 @@
 ChannelListLabel < Label
-  font: lucida-11px-rounded
+  font: bebasek
   background-color: alpha
   text-offset: 2 0
   focusable: true
