@@ -37,6 +37,7 @@
 #include "scheduler.h"
 
 #include "monster.h" //pota
+#include "outfit.h" //Xaii
 
 extern ConfigManager g_config;
 extern Actions actions;

@@ -1,4 +1,4 @@
-local firstItems = {8922, 1988}
+local firstItems = {26821}
 local name = "Pikachu"
 --local portraitId = 27141
 
@@ -24,7 +24,7 @@ function onLogin(player)
 			addPokeball:setSpecialAttribute("pokeBoost", 0)
 			addPokeball:setSpecialAttribute("pokeMaxHealth", maxHealth)
 			addPokeball:setSpecialAttribute("pokeHealth", maxHealth)
-			addPokeball:setSpecialAttribute("pokeLove", 0)
+			--addPokeball:setSpecialAttribute("pokeLove", 0)
 		else
 			print("WARNING! Player " .. player:getName() .. " without initial pokeball.")
 		end

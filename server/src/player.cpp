@@ -111,7 +111,7 @@ std::string Player::getDescription(int32_t lookDistance) const
 		} else if (vocation->getId() != VOCATION_NONE) {
 			s << " You are " << vocation->getVocDescription() << '.';
 		} else {
-			s << " You have no vocation.";
+			s << " You are Trainer.";
 		}
 	} else {
 		s << name;

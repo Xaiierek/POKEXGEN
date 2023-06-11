@@ -229,11 +229,11 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		if not target:isMonster() then			
 			local text = player:getPokedexStatus(baseStorageDex)
 			if #text >= 1000 then
-				print("Sending ExtendedOpcode: " .. pokedexId)
+				--print("Sending ExtendedOpcode: " .. pokedexId)
 				player:sendExtendedOpcode(198, pokedexId, string.sub(text, math.floor(#text/2) + 1 , #text))
 				player:sendExtendedOpcode(198, pokedexId, string.sub(text, 1 , math.floor(#text/2)))
 			else
-				--player:showTextDialog(pokedexId, text)
+				player:showTextDialog(pokedexId, text)
 				player:sendExtendedOpcode(198, pokedexId, text)
 			end
 			return true 
@@ -271,7 +271,7 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			end
 			if portraitId == 0 or portraitItemType:getId() == 0 then portraitId = pokedexId end
 			local dex_information = string.format("dex_data|%s|%s|%s|%s", monsterType:getName(), monsterType:getRaceName(), monsterType:getRace2Name(), moveListStr)
-			print("Sending ExtendedOpcode: " .. dex_information)
+			--print("Sending ExtendedOpcode: " .. dex_information)
 			player:sendExtendedOpcode(198, dex_information .. "|")
 		end
 	end

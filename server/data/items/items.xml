@@ -3,10 +3,10 @@
 	<!-- Pokemon Project -->
 
 	<item id="2270" article="an" name="order button">
-		<attribute key="slotType" value="order" />
+		<attribute key="slotType" value="necklace" />
 	</item>
 	<item id="26820" article="a" name="rod">
-		<attribute key="slotType" value="necklace" />
+		<attribute key="slotType" value="ammo" />
 	</item>
 	<item id="38682" article="a" name="rope">
 		<attribute key="slotType" value="ring" />
@@ -19,7 +19,7 @@
 		<attribute key="slotType" value="feet" />
 	</item>
 	<item id="2263" article="an" name="info button">
-		<attribute key="slotType" value="info" />
+		<attribute key="slotType" value="body" />
 	</item>
 
 	<item id="38779" article="a" name="calcium vitamin"/>
@@ -84,8 +84,8 @@
 	<item id="34093" article="an" name="opened door"/>
 
 
-	<item id="26821" article="a" name="dash backpack">
-		<attribute key="containerSize" value="20" />
+	<item id="26821" article="a" name="Inventory">
+		<attribute key="containerSize" value="36" />
 		<attribute key="slotType" value="backpack" />
 	</item>
 	<item id="26760" article="a" name="pkd backpack">
@@ -385,7 +385,7 @@
 		<attribute key="description" value="A peculiar stone that may cause some pokemon to evolve." />
 	</item>
 
-	<!-- Portraits -->
+	<!-- Portraits 
 
 	<item id="27117" article="a" name="portrait">
 		<attribute key="slotType" value="head" />
@@ -2937,7 +2937,7 @@
 	<item id="28535" article="a" name="portrait">
 		<attribute key="slotType" value="head" />
 	</item>
-
+-->
 	<!-- Corpses -->
 
 	<item id="26862" article="a" name="slain bulbasaur">

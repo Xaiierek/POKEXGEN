@@ -19,6 +19,8 @@
 	<event type="move" name="RemoveSummon" script="removesummon.lua" />
 	<event type="modalwindow" name="ModalWindowHelper" script="modalwindowhelper.lua" />
 	<event type="login" name="tutorialModal" event="script" value="tutorial_modal.lua"/>
+	<event type="modalWindow" name="Dialogue" script="dialogue.lua"/>
+
 
 
 </creaturescripts>

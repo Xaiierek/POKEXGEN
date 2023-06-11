@@ -4003,7 +4003,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 					message.type = MESSAGE_HEALED_OTHERS;
 					message.text = spectatorMessage;
 				}
-				tmpPlayer->sendTextMessage(message);
+				//tmpPlayer->sendTextMessage(message);
 			}
 		}
 	} else {

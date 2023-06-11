@@ -29,14 +29,14 @@ local function creatureGreetCallback(cid, message)
 		local ball = pokeballs[i]
 		local ballId = ball:getId()
 		local ballKey = getBallKey(ballId)
-		ball:setSpecialAttribute("pokeHealth", 100000)
+		ball:setSpecialAttribute("pokeHealth", 1000000)
 		local isBallBeingUsed = ball:getSpecialAttribute("isBeingUsed")
 		if ballId == balls[ballKey].usedOff and isBallBeingUsed ~= 1 then
 			ball:transform(balls[ballKey].usedOn)
 		end
 	end
 	selfSay('Take care yourself.', cid)
-	player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
+	player:getPosition():sendMagicEffect(CONST_ME_MAGIC_RED)
 	return false
 end
 

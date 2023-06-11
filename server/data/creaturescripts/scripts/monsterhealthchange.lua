@@ -63,21 +63,21 @@ function onHealthChange(creature, attacker, primaryDamage, primaryType, secondar
 	local masterLevel
 	local summonLevel
 	local summonBoost
-	local summonLove
+	--local summonLove
 
 	if attacker:getMaster() and attacker:getMaster():isNpc() then
 		masterLevel = 100
 		summonLevel = attacker:getLevel()
 		summonBoost = 0
-		summonLove = 0
+		--summonLove = 0
 	else
 		masterLevel = attacker:getMasterLevel()
 		summonLevel = attacker:getLevel()
 		summonBoost = attacker:getBoost()
-		summonLove = attacker:getLove()
+		--summonLove = attacker:getLove()
 	end
 
-	local formulaDamage = damageFormula(masterLevel, summonLevel, summonBoost, summonLove)
+	local formulaDamage = damageFormula(masterLevel, summonLevel, summonBoost)
 	localDamageMultiplier = localDamageMultiplier * formulaDamage
 
 	if secondaryTypeName == "physical" then
@@ -118,7 +118,7 @@ function onHealthChange(creature, attacker, primaryDamage, primaryType, secondar
 	else
 		if math.random(1, 100) <= blockedProbability then
 			localDamageMultiplier = 0.0
-			Game.sendAnimatedText(creature:getPosition(), "BLOCKED", TEXTCOLOR_LIGHTGREY)
+			Game.sendAnimatedText(creature:getPosition(), "BLOCKED", TEXTCOLOR_WHITE)
 		end
 	end
 

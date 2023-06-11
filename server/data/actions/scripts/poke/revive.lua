@@ -37,12 +37,27 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 	end
+	
+	local summon = player:getSummons()[1]
+	if summon and summon:getName() == summonName then
+		player:sendCancelMessage("You cannot use revive while your Pokemon is summoned.")
+		return true
+	end
 
-	target:setSpecialAttribute("pokeHealth", MonsterType(summonName):getHealth())
+	-- reset all cooldowns
+	for i = 1, 12 do 
+		local move = "cd" .. i
+		target:setSpecialAttribute(move, 0)
+	end
+
+	target:setSpecialAttribute("pokeHealth", 1000000)
 	local ballKey = getBallKey(target:getId())
-		if ballId == balls[ballKey].usedOff and isBallBeingUsed ~= 1 then
-			ball:transform(balls[ballKey].usedOn)
-		end
+	local ballId = target:getId()
+	local isBallBeingUsed = target:getSpecialAttribute("isBeingUsed")
+	if ballId == balls[ballKey].usedOff and isBallBeingUsed ~= 1 then
+		target:setSpecialAttribute("isBeingUsed", 0)
+		target:transform(balls[ballKey].usedOn)
+	end
 	player:getPosition():sendMagicEffect(CONST_ME_MAGIC_GREEN)
 	item:remove(1)
 	return true

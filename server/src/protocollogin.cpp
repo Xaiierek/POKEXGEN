@@ -92,13 +92,33 @@ void ProtocolLogin::getCharacterList(const std::string& accountName, const std::
 	output->addString(g_config.getString(ConfigManager::IP));
 	output->add<uint16_t>(g_config.getNumber(ConfigManager::GAME_PORT));
 	output->addByte(0);
-
+	//uint8_t size = std::min<size_t>(std::numeric_limits<uint8_t>::max(), account.characters.size());
+	//output->addByte(size);
+	//for (uint8_t i = 0; i < size; i++) {
+	//	uint32_t vocationId;
+	//	IOLoginData::getVocationForCharacter(account.characters[i], vocationId);
+	//	output->addByte(0);
+	//	output->addString(account.characters[i]);
+	//	output->add<uint32_t>(vocationId);
+	//}
 	uint8_t size = std::min<size_t>(std::numeric_limits<uint8_t>::max(), account.characters.size());
 	output->addByte(size);
 	for (uint8_t i = 0; i < size; i++) {
+		uint32_t vocationId;
+		IOLoginData::getVocationForCharacter(account.characters[i], vocationId);
+		IOLoginData loginData;
+		Outfit_t outfit = loginData.getPlayerOutfit(account.characters[i]);
 		output->addByte(0);
 		output->addString(account.characters[i]);
+		output->add<uint32_t>(vocationId);
+		output->add<uint16_t>(outfit.lookType);
+		output->add<uint8_t>(outfit.lookHead);
+		output->add<uint8_t>(outfit.lookBody);
+		output->add<uint8_t>(outfit.lookLegs);
+		output->add<uint8_t>(outfit.lookFeet);
+		output->add<uint8_t>(outfit.lookAddons);
 	}
+
 
 	//Add premium days
 	output->addByte(0);

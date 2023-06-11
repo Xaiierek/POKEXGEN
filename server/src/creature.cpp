@@ -466,7 +466,7 @@ void Creature::onCreatureMove(Creature* creature, const Tile* newTile, const Pos
 				lastStepCost = 2;
 			} else if (Position::getDistanceX(newPos, oldPos) >= 1 && Position::getDistanceY(newPos, oldPos) >= 1) {
 				//diagonal extra cost
-				lastStepCost = 3;
+				lastStepCost = 1;
 			}
 		} else {
 			stopEventWalk();
@@ -1392,7 +1392,7 @@ int64_t Creature::getStepDuration(Direction dir) const
 {
 	int64_t stepDuration = getStepDuration();
 	if ((dir & DIRECTION_DIAGONAL_MASK) != 0) {
-		stepDuration *= 3;
+		stepDuration *= 1;
 	}
 	return stepDuration;
 }

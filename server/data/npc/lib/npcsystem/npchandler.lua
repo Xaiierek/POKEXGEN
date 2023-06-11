@@ -69,7 +69,7 @@ if NpcHandler == nil then
 		focuses = nil,
 		talkStart = nil,
 		idleTime = 120,
-		talkRadius = 3,
+		talkRadius = 2,
 		talkDelayTime = 1, -- Seconds to delay outgoing messages.
 		talkDelay = nil,
 		callbackFunctions = nil,
@@ -80,8 +80,8 @@ if NpcHandler == nil then
 		topic = nil,
 		messages = {
 			-- These are the default replies of all npcs. They can/should be changed individually for each npc.
-			[MESSAGE_GREET]		= "Greetings, |PLAYERNAME|.",
-			[MESSAGE_FAREWELL] 	= "Good bye, |PLAYERNAME|.",
+			[MESSAGE_GREET]		= "",
+			[MESSAGE_FAREWELL] 	= "",
 			[MESSAGE_BUY] 		= "Do you want to buy |ITEMCOUNT| |ITEMNAME| for |TOTALCOST| gold coins?",
 			[MESSAGE_ONBUY]		= "Here you are.",
 			[MESSAGE_BOUGHT] 	= "Bought |ITEMCOUNT|x |ITEMNAME| for |TOTALCOST| gold.",
@@ -560,6 +560,10 @@ if NpcHandler == nil then
 			local callback = self:getCallback(CALLBACK_CREATURE_DISAPPEAR)
 			if callback == nil or callback(cid) then --pota
 				if self:processModuleCallback(CALLBACK_CREATURE_DISAPPEAR, cid) then
+					local player = Player(cid)
+						if player then
+							player:doSendDialogNpcClose()
+						end
 					local msg = self:getMessage(MESSAGE_WALKAWAY)
 
 					local player = Player(cid)

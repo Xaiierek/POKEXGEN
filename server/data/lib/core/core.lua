@@ -12,4 +12,6 @@ dofile('data/lib/core/json.lua')
 dofile('data/lib/core/item_attributes.lua')
 dofile('data/lib/core/newfunctions.lua')
 dofile('data/lib/core/string.lua')
+dofile('data/lib/core/012-table.lua')
+dofile('data/lib/core/npcdialog_lib.lua')
 

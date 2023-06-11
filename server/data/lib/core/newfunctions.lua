@@ -20,7 +20,7 @@ damageMultiplierMoves = {areawaves = 2.75, singletargetweak = 2.0, singletarget 
 summonLevelDamageBuff = 0.008 -- buff due to summon's level
 playerLevelDamageBuff = 0.0005 -- buff due to player's level
 summonBoostDamageBuff = 0.008 -- buff due to summon's boost
-summonLoveDamageBuff = 0.0002 -- buff due to summon's love
+--summonLoveDamageBuff = 0.0002 -- buff due to summon's love
 vitaminStatusBuff = 1.2
 hunterDamageBuff = 1.1
 blockerHealthBuff = 1.25
@@ -1459,16 +1459,16 @@ end
 
 function getNeededExp(level) return (50 * (level * level * level - 6 * level * level + 17 * level - 12) / 3) end
 
-function statusGainFormula(playerLevel, summonLevel, summonBoost, pokeLove)
-	return (1.0 + summonLevel * summonLevelDamageBuff + playerLevel * playerLevelDamageBuff + summonBoost * summonBoostDamageBuff + pokeLove * summonLoveDamageBuff)
+function statusGainFormula(playerLevel, summonLevel, summonBoost)
+	return (1.0 + summonLevel * summonLevelDamageBuff + playerLevel * playerLevelDamageBuff + summonBoost * summonBoostDamageBuff)
 end
 
-function damageFormula(playerLevel, summonLevel, summonBoost, pokeLove)
-	return statusGainFormula(playerLevel, summonLevel, summonBoost, pokeLove)
+function damageFormula(playerLevel, summonLevel, summonBoost)
+	return statusGainFormula(playerLevel, summonLevel, summonBoost)
 end
 
-function defenseFormula(playerLevel, summonLevel, summonBoost, pokeLove)
-	return (1.0 / 600.0 * statusGainFormula(playerLevel, summonLevel, summonBoost, pokeLove))
+function defenseFormula(playerLevel, summonLevel, summonBoost)
+	return (1.0 / 600.0 * statusGainFormula(playerLevel, summonLevel, summonBoost))
 end
 
 function getBallKey(uid)
@@ -1483,7 +1483,7 @@ end
 function Monster.getTotalHealth(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then
-		local total = math.floor(monsterType:getMaxHealth() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(monsterType:getMaxHealth() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		if self:getMaster():getVocation():getName() == "Blocker" then
 			total = total * blockerHealthBuff
 		end
@@ -1502,7 +1502,7 @@ function Monster.getTotalHealthVocationContribution(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then
 		if self:getMaster():getVocation():getName() == "Blocker" then
-			return math.floor(monsterType:getMaxHealth() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()) * (blockerHealthBuff - 1.0))
+			return math.floor(monsterType:getMaxHealth() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		end
 	end
 	return 0
@@ -1570,7 +1570,7 @@ function Monster.getTotalMeleeAttack(self)
 	end
 	local aveMelee = (minMelee + maxMelee) / 2
 	if self:isPokemon() then 
-		local total = math.floor(aveMelee * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(aveMelee * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		if self:getMaster():getVocation():getName() == "Hunter" then
 			total = total * hunterDamageBuff
 		end
@@ -1651,7 +1651,7 @@ function Monster.getTotalMeleeAttackVocationContribution(self)
 	local aveMelee = (minMelee + maxMelee) / 2
 	if self:isPokemon() then 
 		if self:getMaster():getVocation():getName() == "Hunter" then
-			return math.floor(aveMelee * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()) * (hunterDamageBuff - 1.0))
+			return math.floor(aveMelee * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		end
 	end
 	return 0
@@ -1680,7 +1680,7 @@ end
 function Monster.getTotalMagicAttack(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then
-		local total = math.floor(monsterType:getMoveMagicAttackBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(monsterType:getMoveMagicAttackBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		if self:getMaster():getVocation():getName() == "Hunter" then
 			total = total * hunterDamageBuff
 		end
@@ -1699,7 +1699,7 @@ function Monster.getTotalMagicAttackVocationContribution(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then
 		if self:getMaster():getVocation():getName() == "Hunter" then
-			return math.floor(monsterType:getMoveMagicAttackBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()) * (hunterDamageBuff - 1.0))
+			return math.floor(monsterType:getMoveMagicAttackBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		end
 	end
 	return 0
@@ -1745,7 +1745,7 @@ end
 function Monster.getTotalDefense(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then
-		local total = math.floor(monsterType:getDefense() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(monsterType:getDefense() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		local vitamins = self:getUsedVitaminsNumber("defense")
 		if vitamins > 0 then
 			total = total + math.floor(monsterType:getDefense() * vitamins / maxVitamins * vitaminStatusBuff)
@@ -1798,7 +1798,7 @@ end
 function Monster.getTotalMagicDefense(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then 
-		local total = math.floor(monsterType:getMoveMagicDefenseBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(monsterType:getMoveMagicDefenseBase() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		local vitamins = self:getUsedVitaminsNumber("magicDefense")
 		if vitamins > 0 then
 			total = total + math.floor(monsterType:getMoveMagicDefenseBase() * vitamins / maxVitamins * vitaminStatusBuff)
@@ -1862,7 +1862,7 @@ end
 function Monster.getTotalSpeed(self)
 	local monsterType = MonsterType(self:getName())
 	if self:isPokemon() then 
-		local total = math.floor(monsterType:getBaseSpeed() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost(), self:getLove()))
+		local total = math.floor(monsterType:getBaseSpeed() * statusGainFormula(self:getMaster():getLevel(), self:getLevel(), self:getBoost()))
 		local vitamins = self:getUsedVitaminsNumber("speed")
 		if vitamins > 0 then
 			total = total + math.floor(monsterType:getBaseSpeed() * vitamins / maxVitamins * vitaminStatusBuff)
@@ -2012,7 +2012,7 @@ function Player.checkMoveExhaustion(self, storage, delay)
 			item:setSpecialAttribute(move, os.time() + delay)
 		else
 			self:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "You must wait " .. math.floor(item:getSpecialAttribute(move) + 1 - os.time()) .. " seconds to use this move again")
-			self:getPosition():sendMagicEffect(CONST_ME_POFF)
+			--self:getPosition():sendMagicEffect(CONST_ME_POFF)
 			return true		
 		end
 	end
@@ -2258,18 +2258,18 @@ function Monster.getSummonBoost(self)
 	return 0
 end
 
-function Monster.getLove(self)
-	if self:isPokemon() then
-		local master = self:getMaster()
---		local item = master:getSlotItem(CONST_SLOT_AMMO)
-		local item = master:getUsingBall()
-		local pokeLove = item:getSpecialAttribute("pokeLove")
-		if pokeLove ~= nil then
-			return pokeLove
-		end
-	end
-	return 0
-end
+--function Monster.getLove(self)
+--	if self:isPokemon() then
+--		local master = self:getMaster()
+----		local item = master:getSlotItem(CONST_SLOT_AMMO)
+--		local item = master:getUsingBall()
+--		local pokeLove = item:getSpecialAttribute("pokeLove")
+--		if pokeLove ~= nil then
+--			return pokeLove
+--		end
+--	end
+--	return 0
+--end
 
 function Monster.getMasterLevel(self)
 	if self:isPokemon() then
@@ -2560,7 +2560,7 @@ function doEvolveSummon(cid, evolutionName, ancient)
 --		end
 
 		local baseHealth = MonsterType(evolutionName):getMaxHealth()
-		local newMaxHealth = math.floor(baseHealth * statusGainFormula(master:getLevel(), item:getSpecialAttribute("pokeLevel"), item:getSpecialAttribute("pokeBoost"), item:getSpecialAttribute("pokeLove") or 0))
+		local newMaxHealth = math.floor(baseHealth * statusGainFormula(master:getLevel(), item:getSpecialAttribute("pokeLevel"), item:getSpecialAttribute("pokeBoost")))
 		summon:setMaxHealth(newMaxHealth)
 		summon:setHealth(newMaxHealth)
 
@@ -2659,7 +2659,7 @@ function doAddPokeball(cid, name, level, boost, ballKey, dp, msg)
 			addBall:setSpecialAttribute("pokeExperience", getNeededExp(level))
 			addBall:setSpecialAttribute("pokeMaxHealth", maxHealth)
 			addBall:setSpecialAttribute("pokeHealth", maxHealth)
-			addBall:setSpecialAttribute("pokeLove", 0)
+			--addBall:setSpecialAttribute("pokeLove", 0)
 			if dp == false then
 				player:refreshPokemonBar({}, {})
 			end
@@ -3246,10 +3246,10 @@ function Player:isSummonBlocked()
 --              return true
 --	end
 
-	if self:getSlotItem(CONST_SLOT_LEFT) == nil then
-		self:sendCancelMessage("Sorry, not possible. You need a wand to control your summon.")
-                return true
-	end
+	--if self:getSlotItem(CONST_SLOT_LEFT) == nil then
+	--	self:sendCancelMessage("Sorry, not possible. You need a wand to control your summon.")
+    --            return true
+	--end
 
 	if self:getStorageValue(storageRide) == 1 then
 		self:sendCancelMessage("Sorry, not possible while on ride.")

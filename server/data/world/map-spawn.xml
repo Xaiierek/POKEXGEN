@@ -12496,6 +12496,9 @@
 		<monster name="Dunsparce" x="0" y="0" z="7" spawntime="60" />
 		<monster name="Dunsparce" x="1" y="0" z="7" spawntime="60" />
 	</spawn>
+	<spawn centerx="1061" centery="1055" centerz="7" radius="1">
+		<npc name="Gengo" x="0" y="0" z="7" spawntime="60" />
+	</spawn>
 	<spawn centerx="1386" centery="1055" centerz="7" radius="5">
 		<monster name="Nidoqueen" x="-3" y="-3" z="7" spawntime="180" />
 		<monster name="Nidoqueen" x="1" y="0" z="7" spawntime="180" />

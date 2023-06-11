@@ -27,17 +27,12 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		return false
 	end
 	local targetCorpse = tile:getTopDownItem()
-    local owner = tonumber(target:getAttribute(ITEM_ATTRIBUTE_CUSTOM))
-	    if owner then
-        print("Corpse owner is: " .. owner)
-    else
-        print("Corpse owner not set.")
-    end
 
-    if owner ~= 0 and owner ~= player:getId() then
-        player:sendCancelMessage("Sorry, not possible. You are not the owner.")
-        return true
-    end
+	local owner = targetCorpse:getAttribute(ITEM_ATTRIBUTE_CORPSEOWNER)
+	if owner ~= 0 and owner ~= player:getId() then
+		player:sendCancelMessage("Sorry, not possible. You are not the owner.")
+		return true
+	end
 	
 	local ballKey = getBallKey(item:getId())
 	local playerPos = getPlayerPosition(player)
@@ -92,15 +87,21 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	else
 		player:setStorageValue(storageTry, player:getStorageValue(storageTry) + 1)
 	end
-	if math.random(1, 300) <= chance then -- caught
+	-- 11800 DOUBLE
+	-- 22800 NORMAL
+	if math.random(1, 22800) <= chance then -- caught
 		-- check how many pokeballs the player has
 		if player:getSlotItem(CONST_SLOT_BACKPACK) and player:getSlotItem(CONST_SLOT_BACKPACK):getEmptySlots() >= 1 and player:getFreeCapacity() >= 1 then -- add to backpack
 			addEvent(doAddPokeball, delayMessage, player:getId(), name, level, initialBoost, ballKey, false, delayMessage)
 		else -- send to cp
 			local addPokeball = doAddPokeball(player:getId(), name, level, initialBoost, ballKey, true, delayMessage + 4000)
+			
 			if not addPokeball then
 				print("ERROR! Player " .. player:getName() .. " lost pokemon " .. name .. "! addPokeball false")
+				--Game.broadcastMessage("O Jogador " .. player:getName() .. " BUGOU NO CATCH E PERDEU " ..name.. ".", MESSAGE_STATUS_WARNING)
+			
 			end
+		
 			addEvent(doPlayerSendTextMessage, delayMessage + 2000, player:getId(), MESSAGE_EVENT_ADVANCE, "Since you are at maximum capacity, your ball was sent to CP.")
 		end
 		
@@ -114,6 +115,7 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			if givenExp > maxExpShiny then
 				givenExp = maxExpShiny 
 			end
+
 			addEvent(doPlayerSendTextMessage, delayMessage + 1000, player:getId(), MESSAGE_EVENT_ADVANCE, "You got a bonus exp for your first catch of " .. name .. "!")
 		elseif msgcontains(name, 'Shiny') and player:getStorageValue(storageCatch) > 0 then
 			givenExp = givenExp * multiplierExpShiny
@@ -144,6 +146,8 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		addEvent(doPlayerAddExperience, delayMessage, player:getId(), givenExp)
 		addEvent(doSendMagicEffect, delay, toPosition, balls[ballKey].effectSucceed)
 		addEvent(doPlayerSendTextMessage, delayMessage, player:getId(), MESSAGE_EVENT_ADVANCE, "Congratulations! You have caught a " .. name .. "!")
+		--Game.broadcastMessage("O Jogador " .. player:getName() .. " Capturou " ..name.. ".", MESSAGE_STATUS_WARNING)
+		
 		addEvent(doPlayerSendEffect, delayMessage, player:getId(), 297)
 	else -- missed		
 		addEvent(doSendMagicEffect, delay, toPosition, balls[ballKey].effectFail)

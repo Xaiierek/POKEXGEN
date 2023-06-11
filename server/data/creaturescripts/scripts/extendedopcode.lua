@@ -10,7 +10,7 @@ function onExtendedOpcode(player, opcode, buffer)
 	else
 		-- other opcodes can be ignored, and the server will just work fine...
 	end
-	print(buffer)
+	--print(buffer)
 	if opcode == 14 then
 			--if not (buffer == "getRefresh") then
 			--	if buffer == "sendBanana" then

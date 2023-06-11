@@ -2,7 +2,7 @@
 <monster name="Pikachu" nameDescription="a pikachu" race="electric" race2="none" experience="32" speed="180" manacost="0">
 	<level min="10" max="25"/>
 	<health now="748" max="748" />
-	<look type="928" head="113" body="57" legs="95" feet="113" corpse="26886" />
+	<look type="3375" head="113" body="57" legs="95" feet="113" corpse="26886" />
 	<targetchange interval="5000" chance="0" />
 	<flags>
 		<flag summonable="1" />
@@ -43,7 +43,7 @@
 
 	</moves>
 	<evolutions>
-		<evolution name="Raichu" level="2" chance="60" itemName="thunder stone" count="2"/>
+		<evolution name="Raichu" itemName="thunder stone" count="2"/> 
 
 	</evolutions>
 	<attacks>

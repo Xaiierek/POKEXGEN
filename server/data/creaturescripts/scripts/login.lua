@@ -1,18 +1,4 @@
 function onLogin(player)
-	local loginStr = "Bem vindo ao " .. configManager.getString(configKeys.SERVER_NAME) .. "!"
-	if player:getLastLoginSaved() <= 0 then
-		loginStr = loginStr .. " Please choose your outfit."
-		player:sendOutfitWindow()
-		player:enableAutoLoot()
-	else
-		if loginStr ~= "" then
-			player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
-		end
-
-		loginStr = string.format("Sua ultima visita foi em %s.", os.date("%a %b %d %X %Y", player:getLastLoginSaved()))
-	end
-	player:sendTextMessage(MESSAGE_STATUS_DEFAULT, loginStr)
-
 	-- Stamina
 	nextUseStaminaTime[player.uid] = 0
 
@@ -168,23 +154,9 @@ function onLogin(player)
 --	end
 
 	-- Announces
-	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Welcome to Pokedash Pota v1.0")
-	sendVocationInfo(player)
+	--player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Welcome to Pokedash Pota v1.0")
+	--sendVocationInfo(player)
+	--player:registerEvent("Dialogue")
 	return true
 end
 
-function sendVocationInfo(player)
-    local vocationId = player:getVocation():getId()
-    local vocationName = player:getVocation():getName()
-    local charId = player:getGuid()
-    local vocation_information = string.format("vocation_info|%d|%d|%s", charId, vocationId, vocationName)
-    player:sendExtendedOpcode(196, vocation_information)
-end
-
-function Player:updatePlayerSpeed(speedValue)
-    local totalSpeed = speedValue or self:getStorageValue(storageLogoutSpeed) or 50
-    if totalSpeed < 50 then totalSpeed = 50 end
-    local previousSpeed = self:getSpeed()
-    self:changeSpeed(-self:getSpeed() + totalSpeed)
-    print("Player: " .. self:getName() .. " - Previous speed: " .. previousSpeed .. " - New speed: " .. self:getSpeed() .. " - Speed value: " .. totalSpeed)
-end

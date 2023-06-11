@@ -1031,3 +1031,46 @@ void IOLoginData::removePremiumDays(uint32_t accountId, int32_t removeDays)
 	query << "UPDATE `accounts` SET `premdays` = `premdays` - " << removeDays << " WHERE `id` = " << accountId;
 	Database::getInstance()->executeQuery(query.str());
 }
+bool IOLoginData::getVocationForCharacter(const std::string& characterName, uint32_t& vocationId)
+{
+	Database* db = Database::getInstance();
+
+	std::ostringstream query;
+	query << "SELECT `vocation` FROM `players` WHERE `name` = " << db->escapeString(characterName);
+
+	DBResult_ptr result = db->storeQuery(query.str());
+	if (!result) {
+		return false;
+	}
+
+	vocationId = result->getNumber<uint32_t>("vocation");
+	return true;
+}
+Outfit_t IOLoginData::getPlayerOutfit(const std::string& name)
+{
+	Outfit_t outfit;
+	outfit.lookFeet = 0;
+	outfit.lookLegs = 0;
+	outfit.lookBody = 0;
+	outfit.lookHead = 0;
+	outfit.lookType = 612;
+
+	Database* db = Database::getInstance();
+
+	std::ostringstream query;
+	query << "SELECT `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons` FROM `players` WHERE `name` = " << db->escapeString(name) << " AND `deletion` = 0 LIMIT 1";
+
+	DBResult_ptr result = db->storeQuery(query.str());
+	if (!result) {
+		return outfit;
+	}
+
+	outfit.lookFeet = result->getNumber<uint32_t>("lookfeet");
+	outfit.lookLegs = result->getNumber<uint32_t>("looklegs");
+	outfit.lookBody = result->getNumber<uint32_t>("lookbody");
+	outfit.lookHead = result->getNumber<uint32_t>("lookhead");
+	outfit.lookType = result->getNumber<uint32_t>("looktype");
+	outfit.lookAddons = result->getNumber<uint32_t>("lookaddons");
+
+	return outfit;
+}

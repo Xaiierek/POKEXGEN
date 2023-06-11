@@ -45,19 +45,3 @@ function onSay(player, words)
 	end
 	return false
 end
-
---function onSay(player, words, param)
---	if player:getStorageValue(storageFly) ~= 1 then return false end
---	local position = player:getPosition()
---	position.z = position.z - 1	
---	local destTile = Tile(position)
---	if not destTile then
---		Game.createTile(position)
---		Game.createItem(8426, 1, position)
---		player:teleportTo(position)
---	end	
---	position:createFlyFloor()
---	player:teleportTo(position)
---	player:flyUp()
---	return false
---end

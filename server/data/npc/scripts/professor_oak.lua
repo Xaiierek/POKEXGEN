@@ -7,6 +7,18 @@ local storageCeruleanCave3 = quests.ceruleanCave.prizes[3].uid
 local storageThePokemaster = quests.thePokemaster.prizes[1].uid
 local storageRedRequest = quests.redRequest.prizes[1].uid
 local legendaryIndex = {144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386}
+local item1 = 26735 
+local item2 = 26734 
+local item3 = 26733 
+local itemCount = 1 
+local questStorage = 80000 
+local message = ""
+
+	local name =
+	{
+		"Bulbasaur", "Squirtle", "Charmander"
+	}
+
 
 local keywordHandler = KeywordHandler:new()
 local npcHandler = NpcHandler:new(keywordHandler)
@@ -17,97 +29,62 @@ function onCreatureDisappear(cid)           npcHandler:onCreatureDisappear(cid) 
 function onCreatureSay(cid, type, msg)      npcHandler:onCreatureSay(cid, type, msg)    end
 function onThink()                          npcHandler:onThink()                        end
 
-local function creatureSayCallback(cid, type, msg)
-	if not npcHandler:isFocused(cid) then
-		return false
-	end	
-	if msgcontains(msg, 'bye') or msgcontains(msg, 'no') or msgcontains(msg, 'nao') then
-		selfSay('Tudo bem, volte se mudar de ideia.', cid)
-		npcHandler:releaseFocus(cid)
-	elseif (msgcontains(msg, 'quest') or msgcontains(msg, 'mission') or msgcontains(msg, 'help') or msgcontains(msg, 'ajuda')  or msgcontains(msg, 'problema')) then
-		local player = Player(cid)
-		if player:getStorageValue(storageOakRequest) > 0 then
-			if player:getLevel() >= quests.thePokemaster.level then
-				if not (player:getStorageValue(storageCeruleanCave) == 1 or player:getStorageValue(storageCeruleanCave2) == 1 or player:getStorageValue(storageCeruleanCave3) == 1) then
-					selfSay('Voce ainda nao derrotou o temivel pokemon artificial que vem causando problemas na Cerulean Cave. Volte apos derrota-lo!', cid)
-					npcHandler:releaseFocus(cid)
-				else
-					if player:getStorageValue(storageThePokemaster) <= 0 then
-						selfSay('Voce conseguiu derrotar o poderoso Mewtwo!!! Estou impressionado com suas habilidades.', cid)
-						selfSay('Ha 5 anos atras tive a sorte de encontrar o melhor treinador pokemon, seu nome era Red e era rival de Blue. Em questao de meses ele foi capaz de derrotar a Liga e se tornar o campeao. Mas sua busca por capturar todos os pokemons o fez largar seu cargo de Campeao da Liga.', cid)
-						selfSay('Reza a lenda que ele foi capaz ate mesmo de capturar os passaros lendarios e o temivel mewtwo. Apos descobrir da existencia do pokemon que originou Mewtwo, ele partiu em uma jornada para tentar captura-lo e nunca mais voltou.', cid)
-						selfSay('A ultima noticia que obtive dele e que ele se encontra em uma montanha no noroeste do oceano. Por favor, encontre-o.', cid)
-						player:giveQuestPrize(storageThePokemaster)
-						npcHandler:releaseFocus(cid)
-					else
-						if player:getStorageValue(storageRedRequest) <= 0 then
-							selfSay('Por favor, encontre o Red e tente conversar com ele.', cid)
-							npcHandler:releaseFocus(cid)
-						else
-							selfSay('Estou precisando de uma ajuda para {catalogar} Pokemons.', cid)
-						end
-					end
-				end
-			else
-				selfSay('Voce ainda e muito inexperiente. Volte apos o level ' .. quests.thePokemaster.level .. ".", cid)
-				npcHandler:releaseFocus(cid)
-			end
+
+
+function greetCallback(cid)
+  local player = Player(cid)
+  if player:getStorageValue(questStorage) == -1 then
+	player:doSendDialogNpc(Npc():getId(), "Hello, what do you want?", "Help&Cancel")
+  elseif player:getStorageValue(questStorage) == 1 then
+  	player:doSendDialogNpc(Npc():getId(), "Do you have these items?", "Yes&Cancel", {item1, item2, item3})
+  elseif player:getStorageValue(questStorage) == 2 then
+  	player:doSendDialogNpc(Npc():getId(), "You have already completed this quest.", "Cancel")
+  end
+  return true
+end
+
+function creatureSayCallback(cid, type, msg)
+  local player = Player(cid)
+  if not npcHandler:isFocused(cid) then
+    return false
+  end
+
+	if msgcontains(msg:lower(), "help") and player:getStorageValue(questStorage) == -1 then
+		message = "Can you get some items for me? I will reward you accordingly.Can you get some items for me? I will reward you accordingly.Can you get some items for me? I will reward you accordingly.Can you get some items for me? I will reward you accordingly.Can you get some items for me? I will reward you accordingly."
+		player:doSendDialogNpc(Npc():getId(), message, "Yes&Cancel")
+	elseif msgcontains(msg:lower(), 'yes') and player:getStorageValue(questStorage) == 1 then
+		if player:getItemCount(item1) >= itemCount and player:getItemCount(item2) >= itemCount and player:getItemCount(item3) >= itemCount then
+			player:removeItem(item1, itemCount)
+			player:removeItem(item2, itemCount)
+			player:removeItem(item3, itemCount)
+			player:addExperience(250000, true)
+			player:addItem(2160, 15)
+			player:setStorageValue(questStorage, 2)
+			message = "Good Job! You did it!"
+			player:doSendDialogNpc(Npc():getId(), message, "Cancel")
 		else
-			if player:getLevel() >= quests.oakRequest.level then
-				if player:getStorageValue(storageIndigoLeague) > 0 then
-					selfSay('Muito bem! Vejo que foi capaz de derrotar a Liga. Talvez voce seja capaz me ajudar em uma tarefa. Parece que um poderosissimo Pokemon psiquico criado artificialmente esta causando caos. Me disseram que atualmente ele se encontra na Cerulean cave.', cid)
-					player:setStorageValue(storageOakRequest, 1)
-					npcHandler:releaseFocus(cid)
-				else
-					selfSay('Volte apos vencer a Indigo League.', cid)
-					npcHandler:releaseFocus(cid)
-				end
-			else
-				selfSay('Voce ainda e muito inexperiente. Volte apos o level ' .. quests.oakRequest.level .. ".", cid)
-				npcHandler:releaseFocus(cid)
-			end
+			
+			player:doSendDialogNpc(Npc():getId(), "You don't have all the required items.", "Cancel")
 		end
-	elseif msgcontains(msg, 'catch') or msgcontains(msg, 'catalogar') or msgcontains(msg, 'capturar') then
-		local player = Player(cid)
-		if player:getStorageValue(storageCathemAll) <= 0 then
-			selfSay('Gostaria de me ajudar a catalogar todos os pokemons? Para isso preciso que voce capture todos os pokemons nao lendarios.', cid)
-			npcHandler.topic[cid] = 1
-		elseif player:getStorageValue(storageCathemAll) == 1 then
-			local catchRemainTable = {}
-			for i = 1, 386 do
-				if not isInArray(legendaryIndex, i) then 
-					table.insert(catchRemainTable, i)
-				end
-			end
-			local catchRemain = player:getCatchRemain(catchRemainTable)
-			if catchRemain == 0 then
-				if player:getLevel() >= quests.cathemAll.level then
-					selfSay('Parabens, voce conseguiu capturar todos os pokemons. Tome este item antigo, espero que saiba o que fazer com ele.', cid)
-					player:giveQuestPrize(storageCathemAll, true)
-					player:setStorageValue(storageCathemAll, 2)
-					npcHandler:releaseFocus(cid)
-				else
-					selfSay('Parabens, voce conseguiu capturar todos os pokemons! Volte apos o level ' .. quests.cathemAll.level .. " que te darei um premio.", cid)
-					npcHandler:releaseFocus(cid)
-				end
-			else		
-				selfSay('Volte quando tiver capturado todos os pokemons. Ainda faltam ' .. catchRemain .. ".", cid)
-				npcHandler:releaseFocus(cid)
-			end
-		else
-			selfSay('Voce ja me ajudou antes. Obrigado!', cid)
-			npcHandler:releaseFocus(cid)			
-		end
-	elseif (msgcontains(msg, 'yes') or msgcontains(msg, 'sim')) and npcHandler.topic[cid] == 1 then
-		local player = Player(cid)
-		selfSay('Muito obrigado! Volte quando tiver capturado todos eles que entao te darei um premio.', cid)
-		player:setStorageValue(storageCathemAll, 1)
-		npcHandler:releaseFocus(cid)
+	elseif msgcontains(msg:lower(), "yes") and player:getStorageValue(questStorage) == -1 then
+		player:setStorageValue(questStorage, 1)
+		message = "I would like you to bring me some items needed for research on Pokemon evolution."
+		player:doSendDialogNpc(Npc():getId(), message, "Ok&Cancel", {item1, item2, item3})
+
 	end
+	
+	if msgcontains(msg:lower(), "cancel") or msgcontains(msg:lower(), "ok") then
+		message = "See ya!"
+		player:doSendDialogNpcClose(Npc():getId(), message)
+		npcHandler:unGreet(cid)
+	end
+	
 	return true
 end
 
+
+
+
 npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
-npcHandler:setCallback(CALLBACK_ONTHINK, creatureOnThinkCallback)
-npcHandler:setCallback(CALLBACK_ONRELEASEFOCUS, creatureOnReleaseFocusCallback)
+npcHandler:setCallback(CALLBACK_GREET, greetCallback)
 npcHandler:addModule(FocusModule:new())

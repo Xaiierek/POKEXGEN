@@ -12,7 +12,8 @@ function Creature:onAreaCombat(tile, isAggressive)
 end
 
 function Creature:onTargetCombat(target)
-	if self ~= nil then
+	if not self then return true end
+
 		if self:isPlayer() and target:isMonster() then
 			if isSummon(target) and target:getMaster():isNpc() and not self:isDuelingWithNpc() then
 				return RETURNVALUE_YOUMAYNOTATTACKTHISCREATURE
@@ -46,7 +47,7 @@ function Creature:onTargetCombat(target)
 --		else --tile damage
 		end
 
-	end
+	
 		if (self:isPlayer() and target:isNpc()) then
 			self:say("hi", TALKTYPE_PRIVATE_PN, false, target)
 			self:say("trade", TALKTYPE_PRIVATE_PN, false, target)
